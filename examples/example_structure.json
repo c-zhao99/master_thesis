@@ -1,0 +1,36 @@
+{
+    "entities":
+        [
+            {
+                "entity_name": "",
+                "identifier": [
+                    {
+                        "attribute_name": "",
+                        "cardinality": "",
+                        "attribute_type": "",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    }
+                ],
+                "weak_entity": "entity_name",
+                "attributes": [],
+                "hierarchy": {
+                    "children": [],
+                    "hierarchy_completeness": "",
+                    "hierarchy_disjointness": ""
+                }
+
+            }
+        ],
+    
+    "relationships":
+        [
+            {
+                "relationship_name": "",
+                "entity_from": "",
+                "entity_to": "",
+                "cardinality_from": "",
+                "cardinality_to": ""
+            }
+        ]
+}

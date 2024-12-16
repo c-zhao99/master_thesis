@@ -1,0 +1,388 @@
+{
+    "entities":
+        [
+            {
+                "entity_name": "Quotidiano",
+                "identifier": [
+                    {
+                        "attribute_name": "Data",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    },
+                    {
+                        "attribute_name": "Titolo",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    }
+                ],
+                "weak_entity": "",
+                "attributes": [],
+                "hierarchy": {}
+            },
+            {
+                "entity_name": "Edizione",
+                "identifier": [
+                    {
+                        "attribute_name": "Nome",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    },
+                    {
+                        "attribute_name": "Data",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    },
+                    {
+                        "attribute_name": "Ora",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "int",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    }
+                ],
+                "weak_entity": "",
+                "attributes": [
+                    {
+                        "attribute_name": "Rete",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    },
+                    {
+                        "attribute_name": "Share",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    },
+                    {
+                        "attribute_name": "Ascoltatori",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "int",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    }
+                ],
+                "hierarchy": {}
+            },
+            {
+                "entity_name": "Giornalista",
+                "identifier": [
+                    {
+                        "attribute_name": "CF",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    }
+                ],
+                "weak_entity": "",
+                "attributes": [
+                    {
+                        "attribute_name": "Nome",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    },
+                    {
+                        "attribute_name": "Cognome",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    },
+                    {
+                        "attribute_name": "Indirizzo",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": [
+                            {
+                                "attribute_name": "Via",
+                                "cardinality": "ONE_TO_ONE",
+                                "attribute_type": "string",
+                                "is_unique": true,
+                                "simple_attributes": []
+                            },
+                            {
+                                "attribute_name": "Città",
+                                "cardinality": "ONE_TO_ONE",
+                                "attribute_type": "string",
+                                "is_unique": true,
+                                "simple_attributes": []
+                            },
+                            {
+                                "attribute_name": "Paese",
+                                "cardinality": "ONE_TO_ONE",
+                                "attribute_type": "string",
+                                "is_unique": true,
+                                "simple_attributes": []
+                            }
+                        ]
+                    },
+                    {
+                        "attribute_name": "Telefono",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    },
+                    {
+                        "attribute_name": "Mail",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    }
+                ],
+                "hierarchy": {
+                    "children": [
+                        "Conduttore",
+                        "Inviato"
+                    ],
+                    "hierarchy_completeness": "TOTAL",
+                    "hierarchy_disjointness": "DISJOINT"
+                }
+            },
+            {
+                "entity_name": "Conduttore",
+                "identifier": [
+                    {
+                        "attribute_name": "CF",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    }
+                ],
+                "weak_entity": "",
+                "attributes": [
+                    {
+                        "attribute_name": "Nome",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    },
+                    {
+                        "attribute_name": "Cognome",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    },
+                    {
+                        "attribute_name": "Indirizzo",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": [
+                            {
+                                "attribute_name": "Via",
+                                "cardinality": "ONE_TO_ONE",
+                                "attribute_type": "string",
+                                "is_unique": true,
+                                "simple_attributes": []
+                            },
+                            {
+                                "attribute_name": "Città",
+                                "cardinality": "ONE_TO_ONE",
+                                "attribute_type": "string",
+                                "is_unique": true,
+                                "simple_attributes": []
+                            },
+                            {
+                                "attribute_name": "Paese",
+                                "cardinality": "ONE_TO_ONE",
+                                "attribute_type": "string",
+                                "is_unique": true,
+                                "simple_attributes": []
+                            }
+                        ]
+                    },
+                    {
+                        "attribute_name": "Telefono",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    },
+                    {
+                        "attribute_name": "Mail",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    }
+                ],
+                "hierarchy": {}
+            },
+            {
+                "entity_name": "Inviato",
+                "identifier": [
+                    {
+                        "attribute_name": "CF",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    }
+                ],
+                "weak_entity": "",
+                "attributes": [
+                    {
+                        "attribute_name": "Nome",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    },
+                    {
+                        "attribute_name": "Cognome",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    },
+                    {
+                        "attribute_name": "Indirizzo",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": [
+                            {
+                                "attribute_name": "Via",
+                                "cardinality": "ONE_TO_ONE",
+                                "attribute_type": "string",
+                                "is_unique": true,
+                                "simple_attributes": []
+                            },
+                            {
+                                "attribute_name": "Città",
+                                "cardinality": "ONE_TO_ONE",
+                                "attribute_type": "string",
+                                "is_unique": true,
+                                "simple_attributes": []
+                            },
+                            {
+                                "attribute_name": "Paese",
+                                "cardinality": "ONE_TO_ONE",
+                                "attribute_type": "string",
+                                "is_unique": true,
+                                "simple_attributes": []
+                            }
+                        ]
+                    },
+                    {
+                        "attribute_name": "Telefono",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    },
+                    {
+                        "attribute_name": "Mail",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    }
+                ],
+                "hierarchy": {}
+            },
+            {
+                "entity_name": "Servizio",
+                "identifier": [
+                    {
+                        "attribute_name": "ID",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    }
+                ],
+                "weak_entity": "",
+                "attributes": [
+                    {
+                        "attribute_name": "Durata",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "int",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    }
+                ],
+                "hierarchy": {}
+            },
+            {
+                "entity_name": "Notizia",
+                "identifier": [
+                    {
+                        "attribute_name": "Numero",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "int",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    }
+                ],
+                "weak_entity": "Edizione",
+                "attributes": [
+                    {
+                        "attribute_name": "Argomento",
+                        "cardinality": "ONE_TO_ONE",
+                        "attribute_type": "string",
+                        "is_unique": true,
+                        "simple_attributes": []
+                    }
+                ],
+                "hierarchy": {}
+            }
+        ],
+    "relationships":
+        [
+            {
+                "relationship_name": "Presenta notizie da",
+                "entity_from": "Edizione",
+                "entity_to": "Quotidiano",
+                "cardinality_from": "ZERO_TO_MANY",
+                "cardinality_to": "ONE_TO_MANY"
+            },
+            {
+                "relationship_name": "Conduce",
+                "entity_from": "Conduttore",
+                "entity_to": "Edizione",
+                "cardinality_from": "ZERO_TO_MANY",
+                "cardinality_to": "ONE_TO_ONE"
+            },
+            {
+                "relationship_name": "Segue",
+                "entity_from": "Inviato",
+                "entity_to": "Servizio",
+                "cardinality_from": "ZERO_TO_MANY",
+                "cardinality_to": "ZERO_TO_ONE"
+            },
+            {
+                "relationship_name": "Documenta",
+                "entity_from": "Servizio",
+                "entity_to": "Notizia",
+                "cardinality_from": "ONE_TO_ONE",
+                "cardinality_to": "ZERO_TO_ONE"
+            },
+            {
+                "relationship_name": "Fornisce",
+                "entity_from": "Edizione",
+                "entity_to": "Notizia",
+                "cardinality_from": "ONE_TO_MANY",
+                "cardinality_to": "ONE_TO_ONE"
+            }
+        ]
+}
