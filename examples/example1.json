@@ -8,14 +8,14 @@
                         "attribute_name": "Data",
                         "cardinality": "ONE_TO_ONE",
                         "attribute_type": "string",
-                        "is_unique": true,
+                        "is_unique": false,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Titolo",
                         "cardinality": "ONE_TO_ONE",
                         "attribute_type": "string",
-                        "is_unique": true,
+                        "is_unique": false,
                         "simple_attributes": []
                     }
                 ],
@@ -30,21 +30,21 @@
                         "attribute_name": "Nome",
                         "cardinality": "ONE_TO_ONE",
                         "attribute_type": "string",
-                        "is_unique": true,
+                        "is_unique": false,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Data",
                         "cardinality": "ONE_TO_ONE",
                         "attribute_type": "string",
-                        "is_unique": true,
+                        "is_unique": false,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Ora",
                         "cardinality": "ONE_TO_ONE",
                         "attribute_type": "int",
-                        "is_unique": true,
+                        "is_unique": false,
                         "simple_attributes": []
                     }
                 ],
@@ -54,21 +54,21 @@
                         "attribute_name": "Rete",
                         "cardinality": "ONE_TO_ONE",
                         "attribute_type": "string",
-                        "is_unique": true,
+                        "is_unique": false,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Share",
                         "cardinality": "ONE_TO_ONE",
                         "attribute_type": "string",
-                        "is_unique": true,
+                        "is_unique": false,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Ascoltatori",
                         "cardinality": "ONE_TO_ONE",
                         "attribute_type": "int",
-                        "is_unique": true,
+                        "is_unique": false,
                         "simple_attributes": []
                     }
                 ],
@@ -91,41 +91,41 @@
                         "attribute_name": "Nome",
                         "cardinality": "ONE_TO_ONE",
                         "attribute_type": "string",
-                        "is_unique": true,
+                        "is_unique": false,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Cognome",
                         "cardinality": "ONE_TO_ONE",
                         "attribute_type": "string",
-                        "is_unique": true,
+                        "is_unique": false,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Indirizzo",
                         "cardinality": "ONE_TO_ONE",
                         "attribute_type": "string",
-                        "is_unique": true,
+                        "is_unique": false,
                         "simple_attributes": [
                             {
                                 "attribute_name": "Via",
                                 "cardinality": "ONE_TO_ONE",
                                 "attribute_type": "string",
-                                "is_unique": true,
+                                "is_unique": false,
                                 "simple_attributes": []
                             },
                             {
                                 "attribute_name": "Città",
                                 "cardinality": "ONE_TO_ONE",
                                 "attribute_type": "string",
-                                "is_unique": true,
+                                "is_unique": false,
                                 "simple_attributes": []
                             },
                             {
                                 "attribute_name": "Paese",
                                 "cardinality": "ONE_TO_ONE",
                                 "attribute_type": "string",
-                                "is_unique": true,
+                                "is_unique": false,
                                 "simple_attributes": []
                             }
                         ]
@@ -171,41 +171,41 @@
                         "attribute_name": "Nome",
                         "cardinality": "ONE_TO_ONE",
                         "attribute_type": "string",
-                        "is_unique": true,
+                        "is_unique": false,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Cognome",
                         "cardinality": "ONE_TO_ONE",
                         "attribute_type": "string",
-                        "is_unique": true,
+                        "is_unique": false,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Indirizzo",
                         "cardinality": "ONE_TO_ONE",
                         "attribute_type": "string",
-                        "is_unique": true,
+                        "is_unique": false,
                         "simple_attributes": [
                             {
                                 "attribute_name": "Via",
                                 "cardinality": "ONE_TO_ONE",
                                 "attribute_type": "string",
-                                "is_unique": true,
+                                "is_unique": false,
                                 "simple_attributes": []
                             },
                             {
                                 "attribute_name": "Città",
                                 "cardinality": "ONE_TO_ONE",
                                 "attribute_type": "string",
-                                "is_unique": true,
+                                "is_unique": false,
                                 "simple_attributes": []
                             },
                             {
                                 "attribute_name": "Paese",
                                 "cardinality": "ONE_TO_ONE",
                                 "attribute_type": "string",
-                                "is_unique": true,
+                                "is_unique": false,
                                 "simple_attributes": []
                             }
                         ]
@@ -244,41 +244,41 @@
                         "attribute_name": "Nome",
                         "cardinality": "ONE_TO_ONE",
                         "attribute_type": "string",
-                        "is_unique": true,
+                        "is_unique": false,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Cognome",
                         "cardinality": "ONE_TO_ONE",
                         "attribute_type": "string",
-                        "is_unique": true,
+                        "is_unique": false,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Indirizzo",
                         "cardinality": "ONE_TO_ONE",
                         "attribute_type": "string",
-                        "is_unique": true,
+                        "is_unique": false,
                         "simple_attributes": [
                             {
                                 "attribute_name": "Via",
                                 "cardinality": "ONE_TO_ONE",
                                 "attribute_type": "string",
-                                "is_unique": true,
+                                "is_unique": false,
                                 "simple_attributes": []
                             },
                             {
                                 "attribute_name": "Città",
                                 "cardinality": "ONE_TO_ONE",
                                 "attribute_type": "string",
-                                "is_unique": true,
+                                "is_unique": false,
                                 "simple_attributes": []
                             },
                             {
                                 "attribute_name": "Paese",
                                 "cardinality": "ONE_TO_ONE",
                                 "attribute_type": "string",
-                                "is_unique": true,
+                                "is_unique": false,
                                 "simple_attributes": []
                             }
                         ]
@@ -317,7 +317,7 @@
                         "attribute_name": "Durata",
                         "cardinality": "ONE_TO_ONE",
                         "attribute_type": "int",
-                        "is_unique": true,
+                        "is_unique": false,
                         "simple_attributes": []
                     }
                 ],
@@ -330,7 +330,7 @@
                         "attribute_name": "Numero",
                         "cardinality": "ONE_TO_ONE",
                         "attribute_type": "int",
-                        "is_unique": true,
+                        "is_unique": false,
                         "simple_attributes": []
                     }
                 ],
@@ -340,7 +340,7 @@
                         "attribute_name": "Argomento",
                         "cardinality": "ONE_TO_ONE",
                         "attribute_type": "string",
-                        "is_unique": true,
+                        "is_unique": false,
                         "simple_attributes": []
                     }
                 ],
