@@ -70,11 +70,17 @@ def json_create_relationship(relationship):
     entity_to = relationship["entity_to"]
     cardinality_from = relationship["cardinality_from"]
     cardinality_to = relationship["cardinality_to"]
+    attributes = relationship["attributes"]
+
+    new_attributes = []
+    for attribute in attributes:
+        new_attributes.append(json_create_attribute(attribute))
+
 
     new_cardinality_from = Cardinality.convert_cardinality(cardinality_from)
     new_cardinality_to = Cardinality.convert_cardinality(cardinality_to)
 
-    return Relationship(name, entity_from, entity_to, new_cardinality_from, new_cardinality_to)
+    return Relationship(name, entity_from, entity_to, new_cardinality_from, new_cardinality_to, new_attributes)
 
 
 entities = {}

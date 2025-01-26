@@ -52,12 +52,13 @@ class Hierarchy:
         self.hierarchy_disjointness = hierarchy_disjointness
 
 class Relationship:
-    def __init__(self, name: str, entity_from: str, entity_to: str, cardinality_from: Cardinality, cardinality_to: Cardinality):
+    def __init__(self, name: str, entity_from: str, entity_to: str, cardinality_from: Cardinality, cardinality_to: Cardinality, attributes: list["Attribute"]):
         self.name = name
         self.entity_from = entity_from
         self.entity_to = entity_to
         self.cardinality_from = cardinality_from
         self.cardinality_to = cardinality_to
+        self.attributes = attributes
 
 class Attribute:
     def __init__(self, name: str, cardinality: Cardinality, attribute_type: type, is_unique: bool):

@@ -19,7 +19,6 @@
                     "hierarchy_completeness": "",
                     "hierarchy_disjointness": ""
                 }
-
             }
         ],
     
@@ -30,7 +29,8 @@
                 "entity_from": "",
                 "entity_to": "",
                 "cardinality_from": "",
-                "cardinality_to": ""
+                "cardinality_to": "",
+                "attributes": []
             }
         ]
 }
