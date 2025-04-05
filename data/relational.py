@@ -5,10 +5,10 @@ class Table:
         self.foreign_key = []
         self.attributes = attributes
 
-    def add_foreign_key(self, foreign_key: "ForeignKey"):
+    def add_foreign_key(self, foreign_key: "ForeignKey") -> None:
         self.foreign_key.append(foreign_key)
 
-    def add_attribute(self, attribute: "Attribute"):
+    def add_attribute(self, attribute: "Attribute") -> None:
         self.attributes.append(attribute)
 
 class Attribute:

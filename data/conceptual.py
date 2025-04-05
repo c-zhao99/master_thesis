@@ -34,7 +34,7 @@ class HierarchyCompleteness(Enum):
     TOTAL = auto()
     PARTIAL = auto()
 
-    def convert_completeness(completeness):
+    def convert_completeness(completeness: str) -> "HierarchyCompleteness":
         if completeness == "TOTAL":
             return HierarchyCompleteness.TOTAL
         else:
@@ -44,7 +44,7 @@ class HierarchyDisjointness(Enum):
     OVERLAPPING = auto()
     DISJOINT = auto()
 
-    def convert_disjointness(disjointness):
+    def convert_disjointness(disjointness: str) -> "HierarchyDisjointness":
         if disjointness == "OVERLAPPING":
             return HierarchyDisjointness.OVERLAPPING
         else:
