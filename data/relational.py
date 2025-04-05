@@ -8,6 +8,9 @@ class Table:
     def add_foreign_key(self, foreign_key: "ForeignKey"):
         self.foreign_key.append(foreign_key)
 
+    def add_attribute(self, attribute: "Attribute"):
+        self.attributes.append(attribute)
+
 class Attribute:
     def __init__(self, name: str, attribute_type: type, is_optional: bool, is_unique: bool):
         self.name = name

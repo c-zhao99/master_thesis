@@ -6,7 +6,10 @@
                 "identifier": [
                     {
                         "attribute_name": "",
-                        "cardinality": "",
+                        "cardinality": {
+                            "min_cardinality": "",
+                            "max_cardinality": ""
+                        },
                         "attribute_type": "",
                         "is_unique": true,
                         "simple_attributes": []
@@ -28,8 +31,14 @@
                 "relationship_name": "",
                 "entity_from": "",
                 "entity_to": "",
-                "cardinality_from": "",
-                "cardinality_to": "",
+                "cardinality_from": {
+                    "min_cardinality": "",
+                    "max_cardinality": ""
+                },
+                "cardinality_to": {
+                    "min_cardinality": "",
+                    "max_cardinality": ""
+                },
                 "attributes": []
             }
         ]

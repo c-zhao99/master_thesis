@@ -6,14 +6,20 @@
                 "identifier": [
                     {
                         "attribute_name": "Data",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": false,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Titolo",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": false,
                         "simple_attributes": []
@@ -28,21 +34,30 @@
                 "identifier": [
                     {
                         "attribute_name": "Nome",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": false,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Data",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": false,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Ora",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "int",
                         "is_unique": false,
                         "simple_attributes": []
@@ -52,21 +67,30 @@
                 "attributes": [
                     {
                         "attribute_name": "Rete",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": false,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Share",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": false,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Ascoltatori",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "int",
                         "is_unique": false,
                         "simple_attributes": []
@@ -79,7 +103,10 @@
                 "identifier": [
                     {
                         "attribute_name": "CF",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": true,
                         "simple_attributes": []
@@ -89,41 +116,59 @@
                 "attributes": [
                     {
                         "attribute_name": "Nome",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": false,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Cognome",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": false,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Indirizzo",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": false,
                         "simple_attributes": [
                             {
                                 "attribute_name": "Via",
-                                "cardinality": "ONE_TO_ONE",
+                                "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                                 "attribute_type": "string",
                                 "is_unique": false,
                                 "simple_attributes": []
                             },
                             {
                                 "attribute_name": "Città",
-                                "cardinality": "ONE_TO_ONE",
+                                "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                                 "attribute_type": "string",
                                 "is_unique": false,
                                 "simple_attributes": []
                             },
                             {
                                 "attribute_name": "Paese",
-                                "cardinality": "ONE_TO_ONE",
+                                "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                                 "attribute_type": "string",
                                 "is_unique": false,
                                 "simple_attributes": []
@@ -132,14 +177,20 @@
                     },
                     {
                         "attribute_name": "Telefono",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": true,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Mail",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": true,
                         "simple_attributes": []
@@ -159,7 +210,10 @@
                 "identifier": [
                     {
                         "attribute_name": "CF",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": true,
                         "simple_attributes": []
@@ -169,41 +223,59 @@
                 "attributes": [
                     {
                         "attribute_name": "Nome",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": false,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Cognome",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": false,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Indirizzo",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": false,
                         "simple_attributes": [
                             {
                                 "attribute_name": "Via",
-                                "cardinality": "ONE_TO_ONE",
+                                "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                                 "attribute_type": "string",
                                 "is_unique": false,
                                 "simple_attributes": []
                             },
                             {
                                 "attribute_name": "Città",
-                                "cardinality": "ONE_TO_ONE",
+                                "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                                 "attribute_type": "string",
                                 "is_unique": false,
                                 "simple_attributes": []
                             },
                             {
                                 "attribute_name": "Paese",
-                                "cardinality": "ONE_TO_ONE",
+                                "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                                 "attribute_type": "string",
                                 "is_unique": false,
                                 "simple_attributes": []
@@ -212,14 +284,20 @@
                     },
                     {
                         "attribute_name": "Telefono",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": true,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Mail",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": true,
                         "simple_attributes": []
@@ -232,7 +310,10 @@
                 "identifier": [
                     {
                         "attribute_name": "CF",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": true,
                         "simple_attributes": []
@@ -242,41 +323,59 @@
                 "attributes": [
                     {
                         "attribute_name": "Nome",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": false,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Cognome",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": false,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Indirizzo",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": false,
                         "simple_attributes": [
                             {
                                 "attribute_name": "Via",
-                                "cardinality": "ONE_TO_ONE",
+                                "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                                 "attribute_type": "string",
                                 "is_unique": false,
                                 "simple_attributes": []
                             },
                             {
                                 "attribute_name": "Città",
-                                "cardinality": "ONE_TO_ONE",
+                                "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                                 "attribute_type": "string",
                                 "is_unique": false,
                                 "simple_attributes": []
                             },
                             {
                                 "attribute_name": "Paese",
-                                "cardinality": "ONE_TO_ONE",
+                                "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                                 "attribute_type": "string",
                                 "is_unique": false,
                                 "simple_attributes": []
@@ -285,14 +384,20 @@
                     },
                     {
                         "attribute_name": "Telefono",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": true,
                         "simple_attributes": []
                     },
                     {
                         "attribute_name": "Mail",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": true,
                         "simple_attributes": []
@@ -305,7 +410,10 @@
                 "identifier": [
                     {
                         "attribute_name": "ID",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": true,
                         "simple_attributes": []
@@ -315,7 +423,10 @@
                 "attributes": [
                     {
                         "attribute_name": "Durata",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "int",
                         "is_unique": false,
                         "simple_attributes": []
@@ -328,7 +439,10 @@
                 "identifier": [
                     {
                         "attribute_name": "Numero",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "int",
                         "is_unique": false,
                         "simple_attributes": []
@@ -338,7 +452,10 @@
                 "attributes": [
                     {
                         "attribute_name": "Argomento",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": false,
                         "simple_attributes": []
@@ -353,12 +470,21 @@
                 "relationship_name": "Presenta notizie da",
                 "entity_from": "Edizione",
                 "entity_to": "Quotidiano",
-                "cardinality_from": "ZERO_TO_MANY",
-                "cardinality_to": "ONE_TO_MANY",
+                "cardinality_from": {
+                    "min_cardinality": "ZERO",
+                    "max_cardinality": "MANY"
+                },
+                "cardinality_to": {
+                    "min_cardinality": "ONE",
+                    "max_cardinality": "MANY"
+                },
                 "attributes": [
                     {
                         "attribute_name": "Numero_notizie",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "int",
                         "is_unique": false,
                         "simple_attributes": []
@@ -369,20 +495,35 @@
                 "relationship_name": "Conduce",
                 "entity_from": "Conduttore",
                 "entity_to": "Edizione",
-                "cardinality_from": "ZERO_TO_MANY",
-                "cardinality_to": "ONE_TO_ONE",
+                "cardinality_from": {
+                    "min_cardinality": "ZERO",
+                    "max_cardinality": "MANY"
+                },
+                "cardinality_to": {
+                    "min_cardinality": "ONE",
+                    "max_cardinality": "ONE"
+                },
                 "attributes": []
             },
             {
                 "relationship_name": "Segue",
                 "entity_from": "Inviato",
                 "entity_to": "Servizio",
-                "cardinality_from": "ZERO_TO_MANY",
-                "cardinality_to": "ZERO_TO_ONE",
+                "cardinality_from": {
+                    "min_cardinality": "ZERO",
+                    "max_cardinality": "MANY"
+                },
+                "cardinality_to": {
+                    "min_cardinality": "ZERO",
+                    "max_cardinality": "ONE"
+                },
                 "attributes": [
                     {
                         "attribute_name": "Paga",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "int",
                         "is_unique": false,
                         "simple_attributes": []
@@ -393,12 +534,21 @@
                 "relationship_name": "Documenta",
                 "entity_from": "Servizio",
                 "entity_to": "Notizia",
-                "cardinality_from": "ONE_TO_ONE",
-                "cardinality_to": "ZERO_TO_ONE",
+                "cardinality_from": {
+                    "min_cardinality": "ONE",
+                    "max_cardinality": "ONE"
+                },
+                "cardinality_to": {
+                    "min_cardinality": "ZERO",
+                    "max_cardinality": "ONE"
+                },
                 "attributes": [
                     {
                         "attribute_name": "Lingua",
-                        "cardinality": "ONE_TO_ONE",
+                        "cardinality": {
+                            "min_cardinality": "ONE",
+                            "max_cardinality": "ONE"
+                        },
                         "attribute_type": "string",
                         "is_unique": false,
                         "simple_attributes": []
@@ -409,8 +559,14 @@
                 "relationship_name": "Fornisce",
                 "entity_from": "Edizione",
                 "entity_to": "Notizia",
-                "cardinality_from": "ONE_TO_MANY",
-                "cardinality_to": "ONE_TO_ONE",
+                "cardinality_from": {
+                    "min_cardinality": "ONE",
+                    "max_cardinality": "MANY"
+                },
+                "cardinality_to": {
+                    "min_cardinality": "ONE",
+                    "max_cardinality": "ONE"
+                },
                 "attributes": []
             }
         ]

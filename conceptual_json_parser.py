@@ -15,12 +15,16 @@ def convert_type(attribute_type):
 
 def json_create_attribute(attribute):
     name = attribute["attribute_name"]
+
     cardinality = attribute["cardinality"]
+    min_cardinality = cardinality["min_cardinality"]
+    max_cardinality = cardinality["max_cardinality"]
+
     attribute_type = attribute["attribute_type"]
     is_unique = attribute["is_unique"]
     simple_attributes = attribute["simple_attributes"]
 
-    new_cardinality = Cardinality.convert_cardinality(cardinality)
+    new_cardinality = Cardinality.convert_cardinality(min_cardinality, max_cardinality)
     new_attribute_type = convert_type(attribute_type)
     new_simple_attributes = []
     for simple_attribute in simple_attributes:
@@ -68,6 +72,15 @@ def json_create_relationship(relationship):
     name = relationship["relationship_name"]
     entity_from = relationship["entity_from"]
     entity_to = relationship["entity_to"]
+
+    cardinality_from = relationship["cardinality_from"]
+    min_cardinality_from = cardinality_from["min_cardinality"]
+    max_cardinality_from = cardinality_from["max_cardinality"]
+
+    cardinality_to = relationship["cardinality_to"]
+    min_cardinality_to = cardinality_to["min_cardinality"]
+    max_cardinality_to = cardinality_to["max_cardinality"]
+
     cardinality_from = relationship["cardinality_from"]
     cardinality_to = relationship["cardinality_to"]
     attributes = relationship["attributes"]
@@ -77,28 +90,7 @@ def json_create_relationship(relationship):
         new_attributes.append(json_create_attribute(attribute))
 
 
-    new_cardinality_from = Cardinality.convert_cardinality(cardinality_from)
-    new_cardinality_to = Cardinality.convert_cardinality(cardinality_to)
+    new_cardinality_from = Cardinality.convert_cardinality(min_cardinality_from, max_cardinality_from)
+    new_cardinality_to = Cardinality.convert_cardinality(min_cardinality_to, max_cardinality_to)
 
     return Relationship(name, entity_from, entity_to, new_cardinality_from, new_cardinality_to, new_attributes)
-
-
-entities = {}
-relationships = {}
-
-with open("examples/example1.json", "r") as file:
-    json_data = json.load(file)
-
-for entity in json_data["entities"]:
-    entity_name = entity["entity_name"]
-    if entity_name not in entities:
-        entities[entity_name] = json_create_entity(entity)
-
-for relationship in json_data["relationships"]:
-    relationship_name = relationship["relationship_name"]
-    relationships[relationship_name] = json_create_relationship(relationship)
-
-from diagram_printer import *
-
-print_entities(entities.values())
-print_relationships(relationships.values())

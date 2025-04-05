@@ -1,21 +1,34 @@
 from enum import Enum, auto
 
-class Cardinality(Enum):
-    ZERO_TO_ONE = auto()
-    ZERO_TO_MANY = auto()
-    ONE_TO_ONE = auto()
-    ONE_TO_MANY = auto()
+class MinimumCardinality(Enum):
+    ZERO = auto()
+    ONE = auto()
 
-    def convert_cardinality(cardinality: str):
-        if cardinality == "ZERO_TO_ONE":
-            return Cardinality.ZERO_TO_ONE
-        elif cardinality == "ZERO_TO_MANY":
-            return Cardinality.ZERO_TO_MANY
-        elif cardinality == "ONE_TO_ONE":
-            return Cardinality.ONE_TO_ONE
+class MaximumCardinality(Enum):
+    ONE = auto()
+    MANY = auto()
+
+
+class Cardinality():
+    def __init__(self, min_cardinality: MinimumCardinality, max_cardinality: MaximumCardinality):
+        self.min_cardinality = min_cardinality
+        self.max_cardinality = max_cardinality
+
+    @staticmethod
+    def convert_cardinality(min_c: str, max_c: str) -> "Cardinality": 
+        min_cardinality = None
+        max_cardinality = None
+        if min_c == "ZERO":
+            min_cardinality = MinimumCardinality.ZERO
         else:
-            return Cardinality.ONE_TO_MANY
+            min_cardinality = MinimumCardinality.ONE
+        
+        if max_c == "ONE":
+            max_cardinality = MaximumCardinality.ONE
+        else:
+            max_cardinality = MaximumCardinality.MANY
 
+        return Cardinality(min_cardinality, max_cardinality)
 
 class HierarchyCompleteness(Enum):
     TOTAL = auto()
