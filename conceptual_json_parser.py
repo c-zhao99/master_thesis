@@ -64,9 +64,9 @@ def json_create_entity(entity):
     if hierarchy:
         new_hierarchy = json_create_hierarchy(hierarchy)
 
-        return Entity(entity_name, new_identifiers, weak_entity, new_attributes, new_hierarchy)
+        return Entity(entity_name, new_identifiers, new_attributes, weak_entity, new_hierarchy)
     else:
-        return Entity(entity_name, new_identifiers, weak_entity, new_attributes)
+        return Entity(entity_name, new_identifiers, new_attributes, weak_entity)
   
 def json_create_relationship(relationship):
     name = relationship["relationship_name"]
@@ -81,14 +81,11 @@ def json_create_relationship(relationship):
     min_cardinality_to = cardinality_to["min_cardinality"]
     max_cardinality_to = cardinality_to["max_cardinality"]
 
-    cardinality_from = relationship["cardinality_from"]
-    cardinality_to = relationship["cardinality_to"]
     attributes = relationship["attributes"]
 
     new_attributes = []
     for attribute in attributes:
         new_attributes.append(json_create_attribute(attribute))
-
 
     new_cardinality_from = Cardinality.convert_cardinality(min_cardinality_from, max_cardinality_from)
     new_cardinality_to = Cardinality.convert_cardinality(min_cardinality_to, max_cardinality_to)

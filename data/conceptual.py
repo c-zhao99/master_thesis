@@ -51,7 +51,7 @@ class HierarchyDisjointness(Enum):
             return HierarchyDisjointness.DISJOINT
 
 class Entity:
-    def __init__(self, name: str, identifier: list["Attribute"], weak_entity: str, attributes: list["Attribute"], hierarchy: "Hierarchy" = None):
+    def __init__(self, name: str, identifier: list["Attribute"], attributes: list["Attribute"], weak_entity: str = None, hierarchy: "Hierarchy" = None):
         self.name = name
         self.identifier = identifier
         self.weak_entity = weak_entity

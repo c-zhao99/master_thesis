@@ -87,11 +87,11 @@ def normalize_multi_value_attribute(entity: Entity, attribute: C_Attribute):
     new_entity = None
 
     if attribute.is_unique:
-        new_entity = Entity(entity.name + attribute.name, attribute, None, [])
+        new_entity = Entity(entity.name + attribute.name, attribute, [], None)
     else:
         new_id_cardinality = Cardinality(MinimumCardinality.ONE, MaximumCardinality.ONE)
         new_id = C_Attribute(attribute.name + "_id", new_id_cardinality, int, True)
-        new_entity = Entity(entity.name + attribute.name, new_id, None, [attribute])
+        new_entity = Entity(entity.name + attribute.name, new_id, [attribute], None)
 
     # TODO: remove attribute from the original entity and create a relationship (relationship name composition of two ids)
     return new_entity
