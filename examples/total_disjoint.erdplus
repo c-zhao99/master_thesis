@@ -1,0 +1,111 @@
+{
+  "diagramType": 1,
+  "data": {
+    "nodes": [
+      {
+        "id": "9fa68a41-4195-4703-a4d5-14e46a07ab7a",
+        "type": "Entity",
+        "position": {
+          "x": 700,
+          "y": 185
+        },
+        "data": {
+          "label": "Test",
+          "type": "Subtype",
+          "isConnectable": false,
+          "isSelected": false,
+          "totalSpecialization": true
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false
+      },
+      {
+        "id": "ec2ed566-e3d2-43e2-b004-203cffa607f6",
+        "type": "Entity",
+        "position": {
+          "x": -89,
+          "y": 136
+        },
+        "parentId": "9fa68a41-4195-4703-a4d5-14e46a07ab7a",
+        "data": {
+          "label": "Test1",
+          "isConnectable": false,
+          "type": "Regular",
+          "parentId": "9fa68a41-4195-4703-a4d5-14e46a07ab7a",
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "16ca8164-f4c6-4131-ad08-6cb3d7e0406f",
+        "type": "Entity",
+        "position": {
+          "x": 102,
+          "y": 140
+        },
+        "parentId": "9fa68a41-4195-4703-a4d5-14e46a07ab7a",
+        "data": {
+          "label": "Test2",
+          "isConnectable": false,
+          "type": "Regular",
+          "parentId": "9fa68a41-4195-4703-a4d5-14e46a07ab7a",
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false
+      }
+    ],
+    "edges": [
+      {
+        "id": "9fa68a41-4195-4703-a4d5-14e46a07ab7a->ec2ed566-e3d2-43e2-b004-203cffa607f6",
+        "type": "Subtype",
+        "source": "9fa68a41-4195-4703-a4d5-14e46a07ab7a",
+        "target": "ec2ed566-e3d2-43e2-b004-203cffa607f6",
+        "data": {
+          "label": "Subtype Entity",
+          "isConnectable": false,
+          "type": "Regular",
+          "parentId": "9fa68a41-4195-4703-a4d5-14e46a07ab7a",
+          "isSelected": true
+        }
+      },
+      {
+        "id": "9fa68a41-4195-4703-a4d5-14e46a07ab7a->16ca8164-f4c6-4131-ad08-6cb3d7e0406f",
+        "type": "Subtype",
+        "source": "9fa68a41-4195-4703-a4d5-14e46a07ab7a",
+        "target": "16ca8164-f4c6-4131-ad08-6cb3d7e0406f",
+        "data": {
+          "label": "Subtype Entity",
+          "isConnectable": false,
+          "type": "Regular",
+          "parentId": "9fa68a41-4195-4703-a4d5-14e46a07ab7a",
+          "isSelected": true
+        }
+      }
+    ],
+    "viewport": {
+      "x": 2,
+      "y": 57.5,
+      "zoom": 1
+    }
+  },
+  "name": "total_disjoint",
+  "folder": {
+    "name": "Diagrams",
+    "folderType": 1,
+    "depth": 0,
+    "id": 536
+  },
+  "id": 759
+}

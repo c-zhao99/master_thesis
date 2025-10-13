@@ -1,0 +1,113 @@
+{
+  "diagramType": 1,
+  "data": {
+    "nodes": [
+      {
+        "id": "862091b2-0228-4924-894b-fe95e5f9beba",
+        "type": "Entity",
+        "position": {
+          "x": 700,
+          "y": 185
+        },
+        "data": {
+          "label": "Test",
+          "type": "Subtype",
+          "isConnectable": false,
+          "isSelected": false,
+          "supertypeDefinition": "Overlapping",
+          "totalSpecialization": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false
+      },
+      {
+        "id": "887e41d2-7eef-49c1-a9aa-324b1c1af186",
+        "type": "Entity",
+        "position": {
+          "x": -103,
+          "y": 135
+        },
+        "parentId": "862091b2-0228-4924-894b-fe95e5f9beba",
+        "data": {
+          "label": "Test1",
+          "isConnectable": false,
+          "type": "Regular",
+          "parentId": "862091b2-0228-4924-894b-fe95e5f9beba",
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "29f6257a-d186-4129-8a73-a0ce138538c9",
+        "type": "Entity",
+        "position": {
+          "x": 128,
+          "y": 140
+        },
+        "parentId": "862091b2-0228-4924-894b-fe95e5f9beba",
+        "data": {
+          "label": "Test2",
+          "isConnectable": false,
+          "type": "Regular",
+          "parentId": "862091b2-0228-4924-894b-fe95e5f9beba",
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "id": "862091b2-0228-4924-894b-fe95e5f9beba->887e41d2-7eef-49c1-a9aa-324b1c1af186",
+        "type": "Subtype",
+        "source": "862091b2-0228-4924-894b-fe95e5f9beba",
+        "target": "887e41d2-7eef-49c1-a9aa-324b1c1af186",
+        "data": {
+          "label": "Subtype Entity",
+          "isConnectable": false,
+          "type": "Regular",
+          "parentId": "862091b2-0228-4924-894b-fe95e5f9beba",
+          "isSelected": true
+        }
+      },
+      {
+        "id": "862091b2-0228-4924-894b-fe95e5f9beba->29f6257a-d186-4129-8a73-a0ce138538c9",
+        "type": "Subtype",
+        "source": "862091b2-0228-4924-894b-fe95e5f9beba",
+        "target": "29f6257a-d186-4129-8a73-a0ce138538c9",
+        "data": {
+          "label": "Subtype Entity",
+          "isConnectable": false,
+          "type": "Regular",
+          "parentId": "862091b2-0228-4924-894b-fe95e5f9beba",
+          "isSelected": true
+        }
+      }
+    ],
+    "viewport": {
+      "x": -10.5,
+      "y": -12.5,
+      "zoom": 1
+    }
+  },
+  "name": "partial_overlapping",
+  "folder": {
+    "name": "Diagrams",
+    "folderType": 1,
+    "depth": 0,
+    "id": 536
+  },
+  "id": 758
+}

@@ -1,21 +1,11 @@
-from conceptual_json_parser import *
-
-entities = {}
-relationships = {}
-
-with open("examples/example1.json", "r") as file:
-    json_data = json.load(file)
-
-for entity in json_data["entities"]:
-    entity_name = entity["entity_name"]
-    if entity_name not in entities:
-        entities[entity_name] = json_create_entity(entity)
-
-for relationship in json_data["relationships"]:
-    relationship_name = relationship["relationship_name"]
-    relationships[relationship_name] = json_create_relationship(relationship)
-
+from erdplus_parser import *
 from diagram_printer import *
 
-print_entities(entities.values())
-print_relationships(relationships.values())
+if __name__ == "__main__":
+    file_path = 'examples/every_possibility_no_hierarchy.erdplus'
+
+    erdplus_parser = ERDPLUS_Parser()
+    erdplus_parser.parse_erdplus_diagram(file_path)
+
+    print_entities(erdplus_parser.entities.values())
+    print_relationships(erdplus_parser.relationships.values())
