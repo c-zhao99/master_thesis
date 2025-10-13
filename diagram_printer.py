@@ -4,7 +4,7 @@ def print_entities(entities):
         print("-------------------")
         print(f" - entity name = {entity.name}")
         print(f" - identifiers = ")
-        for identifier in entity.identifier:
+        for identifier in entity.identifiers:
             print(f" - - identifier name = {identifier.name}")
             print(f" - - identifier cardinality = ({identifier.cardinality.min_cardinality}, {identifier.cardinality.max_cardinality})")
             print(f" - - identifier type = {identifier.attribute_type}")
@@ -18,7 +18,7 @@ def print_entities(entities):
                 print("- - - end composite attribute")
             print("")
         print(f" - end identifiers")
-        print(f" - weak entity = {entity.weak_entity}")
+        print(f" - weak entity = {entity.strong_entity}")
         print(f" - attributes = ")
         for attribute in entity.attributes:
             print(f" - - attribute name = {attribute.name}")
