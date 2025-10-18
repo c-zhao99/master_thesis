@@ -189,10 +189,8 @@ class ERDPLUS_Parser:
 
         cardinality = Cardinality(min_cardinality, max_cardinality)
         is_unique = attribute_parameters.get("Unique") or attribute_parameters.get("Partially Unique")
-        attribute_type = str #TODO how to define attribute type in ERD PLUS diagram
         composite = attribute_parameters.get("Composite")
 
         if composite:
-            return CompositeAttribute(name, cardinality, attribute_type, is_unique)
-        return Attribute(name, cardinality, attribute_type, is_unique)
-
+            return CompositeAttribute(name, cardinality, is_unique)
+        return Attribute(name, cardinality, is_unique)

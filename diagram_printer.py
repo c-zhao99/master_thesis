@@ -7,13 +7,11 @@ def print_entities(entities):
         for identifier in entity.identifiers:
             print(f" - - identifier name = {identifier.name}")
             print(f" - - identifier cardinality = ({identifier.cardinality.min_cardinality}, {identifier.cardinality.max_cardinality})")
-            print(f" - - identifier type = {identifier.attribute_type}")
             if type(identifier) == CompositeAttribute:
                 print("- - - composite attribute = ")
                 for simple_attribute in identifier.simple_attributes:
                     print(f" - - - identifier name = {simple_attribute.name}")
                     print(f" - - - identifier cardinality = ({simple_attribute.cardinality.min_cardinality}, {simple_attribute.cardinality.max_cardinality})")
-                    print(f" - - - identifier type = {simple_attribute.attribute_type}")
                     print("")
                 print("- - - end composite attribute")
             print("")
@@ -23,13 +21,11 @@ def print_entities(entities):
         for attribute in entity.attributes:
             print(f" - - attribute name = {attribute.name}")
             print(f" - - attribute cardinality = ({attribute.cardinality.min_cardinality}, {attribute.cardinality.max_cardinality})")
-            print(f" - - attribute type = {attribute.attribute_type}")
             if type(attribute) == CompositeAttribute:
                 print("- - - composite attribute = ")
                 for simple_attribute in attribute.simple_attributes:
                     print(f" - - - attribute name = {simple_attribute.name}")
                     print(f" - - - attribute cardinality = ({simple_attribute.cardinality.min_cardinality}, {simple_attribute.cardinality.max_cardinality})")
-                    print(f" - - - attribute type = {simple_attribute.attribute_type}")
                     print("")
                 print("- - - end composite attribute")
             print("")
@@ -54,13 +50,11 @@ def print_relationships(relationships):
         for attribute in relationship.attributes:
             print(f" - - attribute name = {attribute.name}")
             print(f" - - attribute cardinality = ({attribute.cardinality.min_cardinality}, {attribute.cardinality.max_cardinality})")
-            print(f" - - attribute type = {attribute.attribute_type}")
             if type(attribute) == CompositeAttribute:
                 print("- - - composite attribute = ")
                 for simple_attribute in attribute.simple_attributes:
                     print(f" - - - attribute name = {simple_attribute.name}")
                     print(f" - - - attribute cardinality = ({simple_attribute.cardinality.min_cardinality}, {simple_attribute.cardinality.max_cardinality})")
-                    print(f" - - - attribute type = {simple_attribute.attribute_type}")
                     print("")
                 print("- - - end composite attribute")
             print("")

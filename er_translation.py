@@ -7,7 +7,7 @@ def translate_attribute(conceptual_attribute: C_Attribute) -> R_Attribute:
     # Translate conceptual attribute to relational attribute
     isOptional = True if conceptual_attribute.cardinality.min_cardinality == MinimumCardinality.ZERO else False
     
-    return R_Attribute(conceptual_attribute.name, conceptual_attribute.attribute_type, isOptional, conceptual_attribute.is_unique)
+    return R_Attribute(conceptual_attribute.name, isOptional, conceptual_attribute.is_unique)
 
 def add_foreign_keys_and_attributes(main_table: Table, referenced_table: Table, attributes: list[C_Attribute]) -> None:
     for key in referenced_table.primary_key:
@@ -46,7 +46,7 @@ def get_composite_attributes_choices(entity: Entity, attribute: C_Attribute, cho
         if entity.name in choices:
             choices[entity.name][attribute.name] = {COMPOSITE_ATTRIBUTE_CHOICE.KEEP_COMPOSITE, COMPOSITE_ATTRIBUTE_CHOICE.KEEP_SIMPLE_ATTRIBUTES}
         else:
-            choices[entity.name] = {attribute.name: {COMPOSITE_ATTRIBUTE_CHOICE.KEEP_COMPOSITE}}
+            choices[entity.name] = {attribute.name: {COMPOSITE_ATTRIBUTE_CHOICE.KEEP_COMPOSITE, COMPOSITE_ATTRIBUTE_CHOICE.KEEP_SIMPLE_ATTRIBUTES}}
 
 def normalize_attribute(entity: Entity, attribute: C_Attribute, choice: COMPOSITE_ATTRIBUTE_CHOICE = None):
     if isinstance(attribute, CompositeAttribute) and attribute.cardinality.max_cardinality == MaximumCardinality.MANY:
@@ -55,12 +55,12 @@ def normalize_attribute(entity: Entity, attribute: C_Attribute, choice: COMPOSIT
             # Create a new object of C_Attribute(conceptual attribute) to limit access to child class (CompositeAttribute) attributes
             # In a statically typed language like Java it could just be converted to parent class, but can't do that in a dynamically typed language like Python
 
-            normalize_multi_value_attribute(entity, C_Attribute(attribute.name, attribute.cardinality, attribute.attribute_type, attribute.is_unique))
+            normalize_multi_value_attribute(entity, C_Attribute(attribute.name, attribute.cardinality, attribute.is_unique))
         elif choice == COMPOSITE_ATTRIBUTE_CHOICE.KEEP_SIMPLE_ATTRIBUTES:
             simple_attributes = attribute.simple_attributes
             for simple_attribute in simple_attributes:
 
-                normalize_multi_value_attribute(simple_attribute)
+                normalize_multi_value_attribute(entity, simple_attribute)
                 #TODO: remove attribute and add relationships
                 
     elif isinstance(attribute, CompositeAttribute):
@@ -76,7 +76,7 @@ def normalize_composite_attribute(composite_attribute: CompositeAttribute, choic
         # Create a new object of C_Attribute(conceptual attribute) to limit access to child class (CompositeAttribute) attributes
         # In a statically typed language like Java it could just be converted to parent class, but can't do that in a dynamically typed language like Python
 
-        return C_Attribute(composite_attribute.name, composite_attribute.cardinality, composite_attribute.attribute_type, composite_attribute.is_unique)
+        return C_Attribute(composite_attribute.name, composite_attribute.cardinality, composite_attribute.is_unique)
     elif choice == COMPOSITE_ATTRIBUTE_CHOICE.KEEP_SIMPLE_ATTRIBUTES:
         # Use simple attributes
         return composite_attribute.simple_attributes
@@ -140,7 +140,7 @@ def translate_recursive_relationship(table: Table, relationship: Relationship):
     if relationship.cardinality_from.max_cardinality != relationship.cardinality_to.max_cardinality:
         # add foreign key
         for key in table.primary_key:
-            table.add_foreign_key(R_Attribute(key.name + "2", key.attribute_type, key.is_optional, key.is_unique))
+            table.add_foreign_key(R_Attribute(key.name + "2", key.is_optional, key.is_unique))
     else:
         # create new table
         new_attribues = []
@@ -149,8 +149,8 @@ def translate_recursive_relationship(table: Table, relationship: Relationship):
 
         new_primary_keys = []
         for key in table.primary_key:
-            new_primary_keys.append(R_Attribute(key.name, key.attribute_type, key.is_optional, key.is_unique))
-            new_primary_keys.append(R_Attribute(key.name + "2", key.attribute_type, key.is_optional, key.is_unique))
+            new_primary_keys.append(R_Attribute(key.name, key.is_optional, key.is_unique))
+            new_primary_keys.append(R_Attribute(key.name + "2", key.is_optional, key.is_unique))
 
         new_table = Table(relationship.name, new_primary_keys, new_attribues)
 

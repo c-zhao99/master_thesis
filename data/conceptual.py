@@ -151,10 +151,9 @@ class Relationship:
 
 
 class Attribute:
-    def __init__(self, name: str, cardinality: Cardinality, attribute_type: type, is_unique: bool):
+    def __init__(self, name: str, cardinality: Cardinality, is_unique: bool):
         self._name = name
         self._cardinality = cardinality
-        self._attribute_type = attribute_type
         self._is_unique = is_unique
         
     @property
@@ -166,16 +165,12 @@ class Attribute:
         return self._cardinality
     
     @property
-    def attribute_type(self):
-        return self._attribute_type
-    
-    @property
     def is_unique(self):
         return self._is_unique
 
 class CompositeAttribute(Attribute):
-    def __init__(self, name: str, cardinality: Cardinality, attribute_type: type, is_unique: bool):
-        super().__init__(name, cardinality, attribute_type, is_unique)
+    def __init__(self, name: str, cardinality: Cardinality, is_unique: bool):
+        super().__init__(name, cardinality, is_unique)
         self._simple_attributes = []
     
     @property
