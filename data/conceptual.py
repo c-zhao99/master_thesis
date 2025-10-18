@@ -1,4 +1,5 @@
 from enum import Enum, auto
+from exceptions.exceptions import NoHierarchyExcpetion
 
 class MinimumCardinality(Enum):
     ZERO = auto()
@@ -86,9 +87,10 @@ class Entity:
         self._hierarchy = hierarchy
     
     def add_child(self, child: str):
-        self._hierarchy.add_child(child)
-
-
+        if self.hierarchy:
+            self._hierarchy.add_child(child)
+        else:
+            raise NoHierarchyExcpetion()
 
 class Hierarchy:
     def __init__(self, hierarchy_completeness: HierarchyCompleteness, hierarchy_disjointness: HierarchyDisjointness):
