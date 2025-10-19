@@ -1,0 +1,1 @@
+{attribute_name} {attribute_type} {optional}

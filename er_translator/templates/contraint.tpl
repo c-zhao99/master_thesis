@@ -1,0 +1,1 @@
+CONSTRAINT {constraint_name} CHECK ({conditions})

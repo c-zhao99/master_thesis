@@ -1,0 +1,1 @@
+{attribute} REFERENCES {table}({primary_key})

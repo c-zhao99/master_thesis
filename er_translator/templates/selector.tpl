@@ -1,0 +1,1 @@
+{selector_name} {selector_type} {optional} CHECK ({selector_name} IN ({values}))
