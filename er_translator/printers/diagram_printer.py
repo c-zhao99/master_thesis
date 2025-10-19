@@ -1,4 +1,4 @@
-from data.conceptual import CompositeAttribute
+from ..data.conceptual import CompositeAttribute
 def print_entities(entities):
     for entity in entities:
         print("-------------------")

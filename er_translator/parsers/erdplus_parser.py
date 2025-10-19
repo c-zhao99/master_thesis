@@ -1,7 +1,7 @@
 import json
 from collections import deque
 
-from data.conceptual import *
+from ..data.conceptual import *
 
 class ERDPLUS_Parser:
     def __init__(self):
@@ -38,6 +38,16 @@ class ERDPLUS_Parser:
 
         # parse attributes
         self._parse_attributes()
+
+    def _load_json_data(self, file_path: str):
+        try:
+            with open(file_path, 'r') as file:
+                data = json.load(file)
+                self._json_data = data
+        except FileNotFoundError as e:
+            print(e.strerror)
+        except json.JSONDecodeError as e: 
+            print(e.strerror)
         
     def _separate_nodes(self):
         for node in self._json_data.get("data").get("nodes"):
@@ -122,16 +132,6 @@ class ERDPLUS_Parser:
                 
             attribute_id = json_attribute.get("id")
             self._attribute_ids[attribute_id] = attribute
-
-    def _load_json_data(self, file_path: str):
-        try:
-            with open(file_path, 'r') as file:
-                data = json.load(file)
-                self._json_data = data
-        except FileNotFoundError as e:
-            print(e.strerror)
-        except json.JSONDecodeError as e: 
-            print(e.strerror)
 
     def _create_entity(self, entity_data):
         name = entity_data.get("label")
