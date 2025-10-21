@@ -16,17 +16,17 @@ def parse_erd_plus():
 
 def create_diagram():
     # from E1 to E2
-    r1_from = Cardinality(MinimumCardinality.ONE, MaximumCardinality.ONE)
-    r1_to = Cardinality(MinimumCardinality.ONE, MaximumCardinality.MANY)
+    r1_from = Cardinality(MinimumCardinality.ONE, MaximumCardinality.MANY)
+    r1_to = Cardinality(MinimumCardinality.ONE, MaximumCardinality.ONE)
     # from E2 to E2
-    r2_from = Cardinality(MinimumCardinality.ONE, MaximumCardinality.ONE)
-    r2_to = Cardinality(MinimumCardinality.ONE, MaximumCardinality.MANY)
+    r2_from = Cardinality(MinimumCardinality.ONE, MaximumCardinality.MANY)
+    r2_to = Cardinality(MinimumCardinality.ONE, MaximumCardinality.ONE)
     # from E2 to E3
     r3_from = Cardinality(MinimumCardinality.ONE, MaximumCardinality.MANY)
-    r3_to = Cardinality(MinimumCardinality.ONE, MaximumCardinality.ONE)
-    # from E2 to E4
+    r3_to = Cardinality(MinimumCardinality.ONE, MaximumCardinality.MANY)
+    # from E1 to E4
     r4_from = Cardinality(MinimumCardinality.ONE, MaximumCardinality.MANY)
-    r4_to = Cardinality(MinimumCardinality.ONE, MaximumCardinality.ONE)
+    r4_to = Cardinality(MinimumCardinality.ONE, MaximumCardinality.MANY)
 
     entities, relationships = create_diagram_from_cardinality(
         r1_from=r1_from,
@@ -61,7 +61,7 @@ def create_diagram_from_cardinality(r1_from, r1_to, r2_from, r2_to, r3_from, r3_
     child2.add_identifier(attribute_child2)
     
     #hierarchy
-    hierarchy = Hierarchy(HierarchyCompleteness.TOTAL, HierarchyDisjointness.DISJOINT)
+    hierarchy = Hierarchy(HierarchyCompleteness.TOTAL, HierarchyDisjointness.OVERLAPPING)
     hierarchy.add_child(child1)
     hierarchy.add_child(child2)
     father.set_hierarchy(hierarchy)
@@ -81,7 +81,7 @@ def create_diagram_from_cardinality(r1_from, r1_to, r2_from, r2_to, r3_from, r3_
     r1 = Relationship("R1", "E1", "E2", r1_from, r1_to)
     #r2 = Relationship("R2", "E2", "E2", r2_from, r2_to)
     #r3 = Relationship("R3", "E2", "E3", r3_from, r3_to)
-    #r4 = Relationship("R4", "E2", "E4", r4_from, r4_to)
+    #r4 = Relationship("R4", "E1", "E4", r4_from, r4_to)
 
     #add relationships
     relationships["R1"] = r1
@@ -98,6 +98,15 @@ if __name__ == "__main__":
 
     hieararchy_translator = HierachyTranslator(entities, relationships)
     hieararchy_translator.translate_hierarchies()
-    print(hieararchy_translator.hierarchy_checks.selectors)
-    print(hieararchy_translator.hierarchy_checks.constraints)
-    print(hieararchy_translator.hierarchy_checks.triggers)
+    print("------- SELECTORS -------")
+    for selector in hieararchy_translator.hierarchy_checks.selectors:
+        print(selector)
+        print()
+    print("------- CONSTRAINTS -------")
+    for constraint in hieararchy_translator.hierarchy_checks.constraints:
+        print(constraint)
+        print()
+    print("------- TRIGGERS -------")
+    for trigger in hieararchy_translator.hierarchy_checks.triggers:
+        print(trigger)
+        print()
