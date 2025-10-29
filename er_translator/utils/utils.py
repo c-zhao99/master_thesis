@@ -15,3 +15,9 @@ def create_copy_from_entity(entity: Entity, entity_name: str = None) -> Entity:
         new_attribute = Attribute(attribute.name, attribute.cardinality, attribute.is_unique)
         new_entity.add_attribute(new_attribute)
     return new_entity
+
+def get_primary_keys(entity: Entity) -> list[str]:
+    ids = []
+    for identifier in entity.identifiers:
+        ids.append(identifier.name)
+    return ids

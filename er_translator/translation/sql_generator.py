@@ -1,7 +1,10 @@
 from pathlib import Path
 
 from ..data.conceptual import *
-from ..utils.utils import load_tpl_file
+from ..data.constraint import *
+from ..utils.utils import load_tpl_file, get_primary_keys
+
+
 
 SELECTOR_PREFIX = "TYPE_"
 
@@ -84,16 +87,28 @@ class SQLGenerator:
 
 
     @staticmethod
-    def create_sql_constraint(constraint_name, selector_name, values) -> str:
-        conditions = []
-        for key, value in values.items():
-            conditions.append(f"({selector_name}={key} AND {value})")
-        
-        conditions = " OR ".join(conditions)
+    def create_sql_constraint(constraint: Constraint) -> str:
+        constraint_name = constraint.constraint_name
+        selector_name = constraint.selector_name
+        conditions = constraint.conditions
 
+        complete_conditions = []
+        for condition in conditions:
+            selector_value = condition.selector_value
+            checks = condition.checks
+            complete_checks = []
+            for check in checks:
+                attribute_name = check.attribute_name
+                attribute_value = "NULL" if check.isNull else "NOT NULL"
+
+                complete_check = f"{attribute_name} = {attribute_value}"
+                complete_checks.append(complete_check)
+            complete_condition = f"{selector_name} + {selector_value} AND {" AND ".join(complete_checks)}"
+            complete_conditions.append(complete_condition)
+        
         params = {
             "constraint_name": constraint_name,
-            "conditions": conditions
+            "conditions": complete_conditions
         }
 
         return CONSTRAINT.format(**params)
@@ -116,6 +131,39 @@ class SQLGenerator:
         return CONSTRAINT.format(**params)
     
     @staticmethod
+    def create_sql_trigger_before_insert(relationship, table_name, father, connected_child, selector_name, other_child = None) -> str:
+        trigger_name = relationship.name + connected_child.name
+        primary_keys = get_primary_keys(father)
+        conditions = []
+
+        for primary_key in primary_keys:
+            condition = f"{table_name}.{primary_key} = N.{primary_key}{relationship.name}"
+            conditions.append(condition)
+        
+        hierarchy = father.hierarchy
+        if hierarchy.hierarchy_disjointness == HierarchyDisjointness.DISJOINT:
+            selector_value = connected_child.name
+        else:
+            selector_value = 1
+        
+        params = {
+            "trigger_name": trigger_name,
+            "table_name": table_name,
+            "conditions": " AND ".join(conditions),
+            "selector_name": selector_name,
+            "selector_value": selector_value,
+            "entity_name": father.name
+        }
+        
+        if other_child:
+            params.update({
+                "new_selector_value": other_child.name
+            })
+            return TRIGGER_BOTH_CHILDREN.format(**params)
+        
+        return TRIGGER_ONE_CHILD.format(**params)
+
+    @staticmethod
     def create_sql_constraint_downwards(constraint_name, values) -> str:
         conditions = " OR ".join(values)
 
@@ -125,39 +173,6 @@ class SQLGenerator:
         }
 
         return CONSTRAINT.format(**params)
-    
-    
-
-    @staticmethod
-    def create_sql_trigger_before_insert(relationship, table, father, child, selector_name, foreign_key, other_child = None) -> str:
-        table_name = table.name
-        trigger_name = relationship.name + child.name
-        primary_key = father.identifiers[0].name
-        
-        hierarchy = father.hierarchy
-        if hierarchy.hierarchy_disjointness == HierarchyDisjointness.DISJOINT:
-            selector_value = child.name
-        else:
-            selector_value = 1
-
-        params = {
-            "trigger_name": trigger_name,
-            "table_name": table_name,
-            "foreign_key": foreign_key,
-            "primary_key": primary_key,
-            "selector_name": selector_name,
-            "selector_value": selector_value,
-            "entity_name": father.name
-        }
-
-        
-        if other_child:
-            params.update({
-                "new_selector_value": other_child.name
-            })
-            return TRIGGER_BOTH_CHILDREN.format(**params)
-        
-        return TRIGGER_ONE_CHILD.format(**params)
     
     @staticmethod
     def create_sql_downwards_trigger(relationship_name, child_name, other_child_name, table_name = None, other_table_name = None) -> str:

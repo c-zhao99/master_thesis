@@ -2,8 +2,8 @@ from .sql_generator import SQLGenerator
 from ..data.conceptual import *
 from ..data.hierachy_checks import HierarchyChecks
 from ..data.choices import HIERARCHY_CHOICE
+from ..data.constraint import *
 from ..utils.utils import create_copy_from_entity
-
 
 SELECTOR_PREFIX = "TYPE_"
 
@@ -11,6 +11,7 @@ class HierachyTranslator:
     def __init__(self, entities: list[Entity], relationships: list[Relationship]):
         self._entities = entities
         self._relationships = relationships
+        self._constraints: dict[str, Constraint] = {}
         self._hierarchy_checks = HierarchyChecks()
         
     @property
@@ -134,29 +135,26 @@ class HierachyTranslator:
             self._check_relationship_cardinality_to_child(relationship, father)
 
     def _check_relationship_cardinality_both_child(self, relationship: Relationship, father: Entity):
-        new_entity = Entity(relationship.name)
+       
         entity_from = self._entities[relationship.entity_from]
         entity_to = self._entities[relationship.entity_to]
         
-        other_child = father.hierarchy.children[0] if father.hierarchy.children[0].name != entity_from.name else father.hierarchy.children[1]
         if entity_from.name == entity_to.name:
             self._check_recursive_relationship_child_cardinality(relationship, father, new_entity, entity_from, other_child)
         else:
             if relationship.cardinality_from.max_cardinality == MaximumCardinality.MANY and relationship.cardinality_to.max_cardinality == MaximumCardinality.MANY:
-                foreign_key = self._get_foreign_key_name(relationship, entity_from, father.identifiers[0])
-                self._create_sql_trigger(relationship, new_entity, father, entity_from, foreign_key)
-                foreign_key = self._get_foreign_key_name(relationship, other_child, father.identifiers[0])
-                self._create_sql_trigger(relationship, new_entity, father, other_child, foreign_key)
+                self._create_sql_trigger(relationship, relationship.name, father, entity_from, entity_to)
+                self._create_sql_trigger(relationship, relationship.name, father, entity_to, entity_from)
             elif relationship.cardinality_from.max_cardinality == MaximumCardinality.MANY:
-                foreign_key = self._get_foreign_key_name(relationship, entity_from, father.identifiers[0])
-                self._create_sql_trigger(relationship, father, father, entity_from, foreign_key, other_child)
+                self._create_sql_trigger(relationship, father.name, father, entity_from, entity_to)
                 self._create_sql_constraint(relationship, father, other_child, entity_from)
             else:
-                foreign_key = self._get_foreign_key_name(relationship, other_child, father.identifiers[0])
-                self._create_sql_trigger(relationship, father, father, other_child, foreign_key, entity_from)
+                
+                self._create_sql_trigger(relationship, father.name, father, entity_to, entity_from)
                 self._create_sql_constraint(relationship, father, entity_from, other_child)
 
     def _check_recursive_relationship_child_cardinality(self, relationship: Relationship, father: Entity, new_entity: Entity, entity_from: Entity, other_child: Entity):
+        return
         if relationship.cardinality_from.max_cardinality == MaximumCardinality.MANY and relationship.cardinality_to.max_cardinality == MaximumCardinality.MANY:
             foreign_key = self._get_foreign_key_name(relationship, entity_from, father.identifiers[0])
             self._create_sql_trigger(relationship, new_entity, father, entity_from, foreign_key+"_A")
@@ -167,62 +165,67 @@ class HierachyTranslator:
             self._create_sql_constraint(relationship, father, entity_from, other_child)
 
     def _check_relationship_cardinality_from_child(self, relationship: Relationship, father: Entity):
-        new_entity = Entity(relationship.name)
         entity_from = self._entities[relationship.entity_from]
         entity_to = self._entities[relationship.entity_to]
-        other_child = father.hierarchy.children[0] if father.hierarchy.children[0].name != entity_from.name else father.hierarchy.children[1]
+        
         if relationship.cardinality_from.max_cardinality == MaximumCardinality.MANY and relationship.cardinality_to.max_cardinality == MaximumCardinality.MANY:
-            foreign_key = self._get_foreign_key_name(relationship, entity_from, father.identifiers[0])
-            self._create_sql_trigger(relationship, new_entity, father, entity_from, foreign_key)
+            self._create_sql_trigger(relationship, relationship.name, father, entity_from)
         elif relationship.cardinality_from.max_cardinality == MaximumCardinality.MANY:
-            foreign_key = self._get_foreign_key_name(relationship, entity_from, father.identifiers[0])
-            self._create_sql_trigger(relationship, entity_to, father, entity_from, foreign_key)
+            self._create_sql_trigger(relationship, father.name, father, entity_from)
         else:
             self._create_sql_constraint(relationship, father, entity_from, other_child)
 
     def _check_relationship_cardinality_to_child(self, relationship: Relationship, father: Entity):
-        new_entity = Entity(relationship.name)
+        
         entity_from = self._entities[relationship.entity_from]
         entity_to = self._entities[relationship.entity_to]
-        other_child = father.hierarchy.children[0] if father.hierarchy.children[0].name != entity_to.name else father.hierarchy.children[1]
+        
         if relationship.cardinality_from.max_cardinality == MaximumCardinality.MANY and relationship.cardinality_to.max_cardinality == MaximumCardinality.MANY:
-            foreign_key = self._get_foreign_key_name(relationship, entity_to, father.identifiers[0])
-            self._create_sql_trigger(relationship, new_entity, father, entity_to, foreign_key)
+            self._create_sql_trigger(relationship, relationship.name, father, entity_to)
         elif relationship.cardinality_from.max_cardinality == MaximumCardinality.MANY:
             self._create_sql_constraint(relationship, father, entity_to, other_child)
         else:
-            foreign_key = self._get_foreign_key_name(relationship, entity_to, father.identifiers[0])
-            self._create_sql_trigger(relationship, entity_from, father, entity_to, foreign_key)
+            self._create_sql_trigger(relationship, father.name, father, entity_to)
     
-    def _create_sql_trigger(self, relationship: Relationship, table: Entity, father: Entity, child: Entity, foreign_key: str, other_child: Entity = None):
+    def _create_sql_trigger(self, relationship: Relationship, table_name: str, father: Entity, connected_child: Entity, other_child: Entity = None):
         hierarchy = father.hierarchy
         
         if hierarchy.hierarchy_disjointness == HierarchyDisjointness.OVERLAPPING:
-            selector_name = self._get_selector_name(father, child)
+            selector_name = self._get_selector_name(father, connected_child)
         else:
             selector_name = self._get_selector_name(father)
         if other_child:
-            sql_trigger = SQLGenerator.create_sql_trigger_before_insert(relationship, table, father, child, selector_name, foreign_key, other_child)
+            sql_trigger = SQLGenerator.create_sql_trigger_before_insert(relationship, table_name, father, connected_child, selector_name, other_child)
         else:
-            sql_trigger = SQLGenerator.create_sql_trigger_before_insert(relationship, table, father, child, selector_name, foreign_key)
+            sql_trigger = SQLGenerator.create_sql_trigger_before_insert(relationship, table_name, father, connected_child, selector_name)
         self._hierarchy_checks.add_trigger(sql_trigger)
 
-    def _create_sql_constraint(self, relationship: Relationship, father: Entity, connected_child: Entity, other_child: Entity):
+    def _create_sql_constraint(self, relationship: Relationship, father: Entity, connected_child: Entity):
         hierarchy = father.hierarchy
+
         if hierarchy.hierarchy_disjointness == HierarchyDisjointness.OVERLAPPING:
-            for child in [connected_child, other_child]:
-                selector_name = self._get_selector_name(father, child)
-                constraint_values = self._get_sql_constraint_values_total_overlapping(relationship, father, child)
+            for child in hierarchy.children:
                 constraint_name = child.name
-                sql_constraint = SQLGenerator.create_sql_constraint(constraint_name, selector_name, constraint_values)
-                self._hierarchy_checks.add_constraint(sql_constraint)
+                selector_name = self._get_selector_name(father, child)
+                conditions = self._get_sql_constraint_values_total_overlapping(relationship, father, child)
+
+                constraint = Constraint(constraint_name, selector_name, conditions)
+                
         else:
+            constraint_name = "".join(self._retrieve_children_names(father))
             selector_name = self._get_selector_name(father)
-            constraint_values = self._get_sql_constraint_values_total_disjoint(relationship, father, connected_child, other_child)
-            constraint_name = "".join(constraint_values.keys())
-            sql_constraint = SQLGenerator.create_sql_constraint(constraint_name, selector_name, constraint_values)
-            self._hierarchy_checks.add_constraint(sql_constraint)
+            conditions = self._get_sql_constraint_values_total_disjoint(relationship, father, connected_child)
+            constraint = Constraint(constraint_name, selector_name, conditions)
+        
+        self._add_constraint(constraint)
             
+
+    def _add_constraint(self, constraint: Constraint):
+        constraint_name = constraint.constraint_name
+        if constraint_name in self._constraints:
+            self._constraints[constraint_name].add_conditions(constraint.conditions)
+        else:
+            self._constraints[constraint_name] = constraint
 
     def _create_sql_total_constraint(self, father: Entity):
         children_names = self._retrieve_children_names(father)
@@ -240,23 +243,44 @@ class HierachyTranslator:
     def _get_foreign_key_name(self, relationship: Relationship, child: Entity, primary_key: Attribute):
         return relationship.name + child.name + primary_key.name
 
-    def _get_sql_constraint_values_total_disjoint(self, relationship: Relationship, father: Entity, connected_child: Entity, other_child: Entity) -> dict[str, str]:
-        constraints = {}
-        foreign_key = self._get_foreign_key_name(relationship, connected_child, father.identifiers[0])
-        connected_child_ids = self._get_identifier_names(connected_child)
-        connected_child_attrs = self._get_attributes_names(connected_child)
-        connected_child_attrs.append(foreign_key)
-        other_child_ids = self._get_identifier_names(other_child)
-        other_child_attrs = self._get_attributes_names(other_child)
+    def _get_sql_constraint_values_total_disjoint(self, relationship: Relationship, father: Entity, connected_child: Entity) -> list[Condition]:
+        conditions = []
+        foreign_keys = []
+        is_relationship_optional = self._is_optional_child_entity_relationship(relationship, connected_child)
+        for identifier in father.identifiers:
+            foreign_key_name = self._get_foreign_key_name(relationship, connected_child, identifier)
+            min_cardinality = MinimumCardinality.ZERO if is_relationship_optional else MinimumCardinality.ONE 
+            cardinality = Cardinality(min_cardinality, MaximumCardinality.ONE)
+            foreign_key = Attribute(foreign_key_name, cardinality, True)
+            foreign_keys.append(foreign_key)
         
-        constraints[connected_child.name] = self._get_not_null_constraint_values(connected_child_ids + connected_child_attrs) + " AND " + self._get_null_constraint_values(other_child_ids + other_child_attrs)
-        constraints[other_child.name] = self._get_not_null_constraint_values(other_child_ids + other_child_attrs) + " AND " + self._get_null_constraint_values(connected_child_ids + connected_child_attrs)
-        if father.hierarchy.hierarchy_completeness == HierarchyCompleteness.PARTIAL:
-            constraints[father.name] = self._get_null_constraint_values(other_child_ids + other_child_attrs) + " AND " + self._get_null_constraint_values(connected_child_ids + connected_child_attrs)
-        
-        return constraints
+        hierarchy = father.hierarchy
+        for child in hierarchy.children:
+            checks = []
+            checks += self._get_not_null_checks(child.identifiers)
+            checks += self._get_not_null_checks(child.attributes)
+
+            if child.name == connected_child.name:
+                checks += self._get_not_null_checks(foreign_keys)
+            else:
+                checks += self._get_null_checks(foreign_keys)
+            
+            for other_child in hierarchy.children:
+                if child.name != other_child.name:
+                    checks += self._get_not_null_checks(other_child.identifiers)
+                    checks += self._get_not_null_checks(other_child.attributes)
+            
+            condition = Condition(child.name, checks)
+            conditions.append(condition)
+        return conditions
     
-    def _get_sql_constraint_values_total_overlapping(self, relationship: Relationship, father: Entity, child: Entity) -> dict[str, str]:
+    def _is_optional_child_entity_relationship(self, relationship: Relationship, child: Entity):
+        if relationship.entity_from == child.entity and relationship.cardinality_from.min_cardinality == MinimumCardinality.ZERO:
+            return True
+        elif relationship.entity_to == child.entity and relationship.cardinality_to.min_cardinality == MinimumCardinality.ZERO:
+            return True
+        return False
+    def _get_sql_constraint_values_total_overlapping(self, relationship: Relationship, father: Entity, connected_child: Entity) -> dict[str, str]:
         constraints = {}
         connected_child_ids = self._get_identifier_names(child)
         connected_child_attrs = self._get_attributes_names(child)
@@ -283,19 +307,22 @@ class HierachyTranslator:
 
         return names
     
-    def _get_null_constraint_values(self, attributes: list[str]) -> str:
-        constraint = ""
+    def _get_null_checks(self, attributes: list[Attribute]) -> list[Check]:
+        checks = []
         for attribute in attributes:
-            constraint += (attribute + " IS NULL AND ")
+            check = Check(attribute.name, True)
+            checks.append(check)
 
-        return constraint[:-5]
+        return checks
     
-    def _get_not_null_constraint_values(self, attributes: list[str]) -> str:
-        constraint = ""
+    def _get_not_null_checks(self, attributes: list[Attribute]) -> list[Check]:
+        checks = []
         for attribute in attributes:
-            constraint += (attribute + " IS NOT NULL AND ")
+            if attribute.cardinality.min_cardinality == MinimumCardinality.ONE:
+                check = Check(attribute.name, False)
+                checks.append(check)
 
-        return constraint[:-5]
+        return checks
 
     def _create_sql_constraint_downwards(self, relationship: Relationship, entity: Entity, other_table: Entity):
         constraint_name = relationship.name

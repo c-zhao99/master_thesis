@@ -5,7 +5,7 @@ FOR EACH ROW
 WHEN (
     N.{selector_name} = {new_selector_value} AND NOT EXISTS(
         SELECT * FROM {entity_name}
-        WHERE {entity_name}.{primary_key} = N.{foreign_key}
+        WHERE {conditions}
         AND {entity_name}.{selector_name} = {selector_value}
     )
 )
