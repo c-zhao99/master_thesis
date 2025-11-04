@@ -1,12 +1,12 @@
 class Table:
-    def __init__(self, name: str, primary_key: list["Attribute"], attributes: list["Attribute"]):
+    def __init__(self, name: str, primary_keys: list["Attribute"], attributes: list["Attribute"]):
         self.name = name
-        self.primary_key = primary_key
-        self.foreign_key = []
+        self.primary_keys = primary_keys
+        self.foreign_keys = []
         self.attributes = attributes
 
     def add_foreign_key(self, foreign_key: "ForeignKey") -> None:
-        self.foreign_key.append(foreign_key)
+        self.foreign_keys.append(foreign_key)
 
     def add_attribute(self, attribute: "Attribute") -> None:
         self.attributes.append(attribute)
