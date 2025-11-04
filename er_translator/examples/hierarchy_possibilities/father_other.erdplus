@@ -1,0 +1,300 @@
+{
+  "diagramType": 1,
+  "data": {
+    "nodes": [
+      {
+        "id": "06f2cc1a-7585-43df-9b32-2ed20d63e666",
+        "type": "Entity",
+        "position": {
+          "x": 700,
+          "y": 245
+        },
+        "data": {
+          "label": "Vehicle",
+          "type": "Supertype",
+          "isConnectable": false,
+          "isSelected": true,
+          "totalSpecialization": true,
+          "supertypeDefinition": "Disjointed"
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": true
+      },
+      {
+        "id": "d466e059-ae3a-4abb-8f8b-b09d6dad824d",
+        "parentId": "06f2cc1a-7585-43df-9b32-2ed20d63e666",
+        "type": "Attribute",
+        "position": {
+          "x": -6.429395695523604e-15,
+          "y": -105
+        },
+        "data": {
+          "label": "ChassisNumber",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false,
+          "isConnectable": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false
+      },
+      {
+        "id": "625e1fe7-3409-4560-9516-5d2793ebb51d",
+        "type": "Entity",
+        "position": {
+          "x": 106.55390493500886,
+          "y": 159.51301645002962
+        },
+        "parentId": "06f2cc1a-7585-43df-9b32-2ed20d63e666",
+        "data": {
+          "label": "Bike",
+          "isConnectable": false,
+          "type": "Regular",
+          "parentId": "06f2cc1a-7585-43df-9b32-2ed20d63e666",
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "b98d12e4-3d43-4b68-bda6-caa94be0048f",
+        "type": "Entity",
+        "position": {
+          "x": -89,
+          "y": 160
+        },
+        "parentId": "06f2cc1a-7585-43df-9b32-2ed20d63e666",
+        "data": {
+          "label": "Car",
+          "isConnectable": false,
+          "type": "Regular",
+          "parentId": "06f2cc1a-7585-43df-9b32-2ed20d63e666",
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "9bf23736-8b28-4635-899e-0eb37194e425",
+        "parentId": "b98d12e4-3d43-4b68-bda6-caa94be0048f",
+        "type": "Attribute",
+        "position": {
+          "x": -2,
+          "y": 104
+        },
+        "data": {
+          "label": "Color",
+          "types": {
+            "Optional": false
+          },
+          "isSelected": false,
+          "isConnectable": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "5e4c00ad-a988-4d82-907c-9afa140ab68b",
+        "parentId": "625e1fe7-3409-4560-9516-5d2793ebb51d",
+        "type": "Attribute",
+        "position": {
+          "x": -0.553904935008859,
+          "y": 106.63568190496727
+        },
+        "data": {
+          "label": "Electric",
+          "types": [],
+          "isSelected": false,
+          "isConnectable": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "3a65190f-1d4b-4d81-be18-17503787dbad",
+        "type": "Entity",
+        "position": {
+          "x": 989,
+          "y": 244
+        },
+        "data": {
+          "label": "Person",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "950e0d39-54d2-4bde-b5ac-a453fc87f04a",
+        "parentId": "3a65190f-1d4b-4d81-be18-17503787dbad",
+        "type": "Attribute",
+        "position": {
+          "x": -6.429395695523604e-15,
+          "y": -105
+        },
+        "data": {
+          "label": "SSN",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false,
+          "isConnectable": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false
+      },
+      {
+        "id": "8f0afa4c-877c-4834-9e7f-2d45aa2b0001",
+        "type": "Relationship",
+        "position": {
+          "x": 843.5,
+          "y": 247
+        },
+        "data": {
+          "label": "Own",
+          "sourceEntityDetails": {
+            "id": "3a65190f-1d4b-4d81-be18-17503787dbad",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "targetEntityDetails": {
+            "id": "06f2cc1a-7585-43df-9b32-2ed20d63e666",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "isSelected": false,
+          "isConnectable": true
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false
+      }
+    ],
+    "edges": [
+      {
+        "id": "59e27b29-a4d7-4f16-9da9-d93070283a31",
+        "type": "Attribute",
+        "source": "06f2cc1a-7585-43df-9b32-2ed20d63e666",
+        "target": "d466e059-ae3a-4abb-8f8b-b09d6dad824d"
+      },
+      {
+        "id": "06f2cc1a-7585-43df-9b32-2ed20d63e666->625e1fe7-3409-4560-9516-5d2793ebb51d",
+        "type": "Supertype",
+        "source": "06f2cc1a-7585-43df-9b32-2ed20d63e666",
+        "target": "625e1fe7-3409-4560-9516-5d2793ebb51d",
+        "data": {
+          "label": "Subtype Entity",
+          "isConnectable": false,
+          "type": "Regular",
+          "parentId": "06f2cc1a-7585-43df-9b32-2ed20d63e666",
+          "isSelected": true,
+          "supertypeDefinition": "Disjointed",
+          "totalSpecialization": true
+        }
+      },
+      {
+        "id": "06f2cc1a-7585-43df-9b32-2ed20d63e666->b98d12e4-3d43-4b68-bda6-caa94be0048f",
+        "type": "Supertype",
+        "source": "06f2cc1a-7585-43df-9b32-2ed20d63e666",
+        "target": "b98d12e4-3d43-4b68-bda6-caa94be0048f",
+        "data": {
+          "label": "Subtype Entity",
+          "isConnectable": false,
+          "type": "Regular",
+          "parentId": "06f2cc1a-7585-43df-9b32-2ed20d63e666",
+          "isSelected": true,
+          "supertypeDefinition": "Disjointed",
+          "totalSpecialization": true
+        }
+      },
+      {
+        "id": "1f48c7aa-832d-4e63-9e01-8602461ad51e",
+        "type": "Attribute",
+        "source": "b98d12e4-3d43-4b68-bda6-caa94be0048f",
+        "target": "9bf23736-8b28-4635-899e-0eb37194e425"
+      },
+      {
+        "id": "b51fa7ca-310f-4d67-8225-33aabfcae455",
+        "type": "Attribute",
+        "source": "625e1fe7-3409-4560-9516-5d2793ebb51d",
+        "target": "5e4c00ad-a988-4d82-907c-9afa140ab68b"
+      },
+      {
+        "id": "2b32df2d-007f-449b-acff-ec8feb8510be",
+        "type": "Attribute",
+        "source": "3a65190f-1d4b-4d81-be18-17503787dbad",
+        "target": "950e0d39-54d2-4bde-b5ac-a453fc87f04a"
+      },
+      {
+        "id": "8f0afa4c-877c-4834-9e7f-2d45aa2b0001->3a65190f-1d4b-4d81-be18-17503787dbad;3a65190f-1d4b-4d81-be18-17503787dbad->06f2cc1a-7585-43df-9b32-2ed20d63e666",
+        "type": "Relationship",
+        "source": "8f0afa4c-877c-4834-9e7f-2d45aa2b0001",
+        "target": "3a65190f-1d4b-4d81-be18-17503787dbad",
+        "data": {
+          "id": "8f0afa4c-877c-4834-9e7f-2d45aa2b0001->3a65190f-1d4b-4d81-be18-17503787dbad",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "8f0afa4c-877c-4834-9e7f-2d45aa2b0001->06f2cc1a-7585-43df-9b32-2ed20d63e666;3a65190f-1d4b-4d81-be18-17503787dbad->06f2cc1a-7585-43df-9b32-2ed20d63e666",
+        "type": "Relationship",
+        "source": "8f0afa4c-877c-4834-9e7f-2d45aa2b0001",
+        "target": "06f2cc1a-7585-43df-9b32-2ed20d63e666",
+        "data": {
+          "id": "8f0afa4c-877c-4834-9e7f-2d45aa2b0001->06f2cc1a-7585-43df-9b32-2ed20d63e666",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      }
+    ],
+    "viewport": {
+      "x": -97,
+      "y": -50.57434917749845,
+      "zoom": 1
+    }
+  },
+  "name": "father_other",
+  "folder": {
+    "name": "Diagrams",
+    "folderType": 1,
+    "depth": 0,
+    "id": 536
+  },
+  "id": 143318,
+  "updatedAtTimestamp": 1762214388
+}
