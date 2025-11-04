@@ -1,1 +1,1 @@
-{attribute_name} {attribute_type} {optional}
+{attribute_name} {attribute_type}{unique}{optional}

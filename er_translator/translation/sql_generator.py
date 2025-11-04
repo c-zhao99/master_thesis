@@ -28,21 +28,17 @@ class SQLGenerator:
             attributes_list += ","
         selectors_list = ""
         if selectors:
-            selectors_list = ",\n    ".join(selectors)
+            selectors_list = "\n    " + ",\n    ".join(selectors)
             selectors_list += ","
         references_list = ""
         if references:
-            references_list = ",\n    ".join(references)
+            references_list = "\n    " + ",\n    ".join(references)
             references_list += ","
         primary_keys_list = ",".join(primary_keys)
-        if constraints:
-            primary_keys_list += "),"
-        else:
-            primary_keys_list += ")"
+        primary_keys_list += ")"
         constraints_list = ""
         if constraints:
-            constraints_list = ",\n    ".join(constraints)
-            constraints_list = constraints_list
+            constraints_list = ",\n    " + ",\n    ".join(constraints)
         
         params = {
             "table_name": table_name,
@@ -57,11 +53,12 @@ class SQLGenerator:
         return TABLE.format(**params)
     
     @staticmethod
-    def create_sql_attribute(attribute_name: str) -> str:
+    def create_sql_attribute(attribute_name: str, is_optional: bool, is_unique: bool = False) -> str:
         params = {
                 "attribute_name": attribute_name,
-                "attribute_type": "VARCHAR(10)",
-                "optional": "NOT NULL"
+                "attribute_type": "{ADD_TYPE}",
+                "optional": "" if is_optional else " NOT NULL",
+                "unique": " UNIQUE" if is_unique else ""
             }
         return ATTRIBUTE.format(**params)
 
@@ -101,14 +98,14 @@ class SQLGenerator:
                 attribute_name = check.attribute_name
                 attribute_value = "NULL" if check.isNull else "NOT NULL"
 
-                complete_check = f"{attribute_name} = {attribute_value}"
+                complete_check = f"{attribute_name} IS {attribute_value}"
                 complete_checks.append(complete_check)
-            complete_condition = f"{selector_name} + {selector_value} AND {" AND ".join(complete_checks)}"
+            complete_condition = f"({selector_name} = {selector_value} AND {" AND ".join(complete_checks)})"
             complete_conditions.append(complete_condition)
         
         params = {
             "constraint_name": constraint_name,
-            "conditions": complete_conditions
+            "conditions": " OR ".join(complete_conditions)
         }
 
         return CONSTRAINT.format(**params)
@@ -131,13 +128,16 @@ class SQLGenerator:
         return CONSTRAINT.format(**params)
     
     @staticmethod
-    def create_sql_trigger_before_insert(relationship, table_name, father, connected_child, selector_name, other_child = None) -> str:
+    def create_sql_trigger_before_insert(relationship, table_name, father, connected_child, selector_name, other_child = None, identifier_modifier: str = "") -> str:
         trigger_name = relationship.name + connected_child.name
         primary_keys = get_primary_keys(father)
         conditions = []
 
         for primary_key in primary_keys:
-            condition = f"{table_name}.{primary_key} = N.{primary_key}{relationship.name}"
+            if identifier_modifier != "":
+                condition = f"{father.name}.{primary_key} = N.{connected_child.name}_{primary_key}{identifier_modifier}"
+            else:
+                condition = f"{father.name}.{primary_key} = N.{connected_child.name}_{primary_key}"
             conditions.append(condition)
         
         hierarchy = father.hierarchy
@@ -162,10 +162,11 @@ class SQLGenerator:
             return TRIGGER_BOTH_CHILDREN.format(**params)
         
         return TRIGGER_ONE_CHILD.format(**params)
+    
 
     @staticmethod
-    def create_sql_constraint_downwards(constraint_name, values) -> str:
-        conditions = " OR ".join(values)
+    def create_sql_downwards_constraint(constraint_name, conditions) -> str:
+        conditions = " OR ".join(conditions)
 
         params = {
             "constraint_name": constraint_name,
@@ -173,15 +174,14 @@ class SQLGenerator:
         }
 
         return CONSTRAINT.format(**params)
-    
+
     @staticmethod
-    def create_sql_downwards_trigger(relationship_name, child_name, other_child_name, table_name = None, other_table_name = None) -> str:
+    def create_sql_downwards_trigger(relationship_name, table_name, other_table_name, conditions) -> str:
         params = {
-            "trigger_name": relationship_name + child_name,
-            "table_name": table_name if table_name else child_name,
-            "reference_child": relationship_name + child_name,
-            "other_table_name": other_table_name if other_table_name else other_child_name,
-            "reference_other_child": relationship_name + other_child_name,
+            "trigger_name": relationship_name + "_" + table_name + "_" + other_table_name,
+            "table_name": table_name,
+            "other_table_name": other_table_name,
+            "conditions": conditions,
             "relationship_name": relationship_name
         }
         return TRIGGER_DOWNWARDS.format(**params)

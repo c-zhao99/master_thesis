@@ -6,7 +6,7 @@ WHEN (
     EXISTS(
         SELECT *
         FROM {other_table_name}
-        WHERE N.{reference_child} = {other_table_name}.{reference_other_child}
+        WHERE {conditions}
     )
 )
 SIGNAL SQLSTATE '70001' ('Only one relationship active at a time for {relationship_name}!')
