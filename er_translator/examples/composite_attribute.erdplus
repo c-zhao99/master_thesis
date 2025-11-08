@@ -61,7 +61,7 @@
           "width": 100,
           "height": 50
         },
-        "selected": true,
+        "selected": false,
         "dragging": false
       },
       {
@@ -186,8 +186,8 @@
       }
     ],
     "viewport": {
-      "x": -25.12310601229376,
-      "y": 15,
+      "x": -33.24621202458752,
+      "y": 51.87689398770627,
       "zoom": 1
     }
   },
@@ -199,5 +199,5 @@
     "id": 536
   },
   "id": 152164,
-  "updatedAtTimestamp": 1762610186
+  "updatedAtTimestamp": 1762617498
 }

@@ -53,7 +53,7 @@
           "label": "Own",
           "sourceEntityDetails": {
             "id": "d654e231-5652-447e-9f13-75f38a8628fe",
-            "minCardinality": "Mandatory",
+            "minCardinality": "Optional",
             "maxCardinality": "One"
           },
           "targetEntityDetails": {
@@ -89,7 +89,8 @@
         "measured": {
           "width": 100,
           "height": 50
-        }
+        },
+        "selected": false
       },
       {
         "id": "4a9be936-a2ec-48d1-bf9f-02dca0a9676b",
@@ -109,7 +110,8 @@
         "measured": {
           "width": 100,
           "height": 50
-        }
+        },
+        "selected": false
       }
     ],
     "edges": [
@@ -131,7 +133,7 @@
         "target": "067e01a9-9cda-4779-ba65-c3f32352e527",
         "data": {
           "id": "20a1e3a7-efc8-4292-9142-16a0dab14a03->067e01a9-9cda-4779-ba65-c3f32352e527",
-          "minCardinality": "Mandatory",
+          "minCardinality": "Optional",
           "maxCardinality": "One"
         }
       },
@@ -149,12 +151,12 @@
       }
     ],
     "viewport": {
-      "x": -2,
-      "y": 27.5,
+      "x": 43,
+      "y": 78,
       "zoom": 1
     }
   },
-  "name": "relantionship_1_1",
+  "name": "relationship_1_1",
   "folder": {
     "name": "Diagrams",
     "folderType": 1,
@@ -162,5 +164,5 @@
     "id": 536
   },
   "id": 152181,
-  "updatedAtTimestamp": 1762610908
+  "updatedAtTimestamp": 1762619479
 }

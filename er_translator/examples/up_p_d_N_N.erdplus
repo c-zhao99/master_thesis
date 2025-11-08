@@ -323,15 +323,17 @@
         },
         "data": {
           "label": "CustomerID",
-          "types": [],
-          "isSelected": false,
+          "types": {
+            "Unique": true
+          },
+          "isSelected": true,
           "isConnectable": true
         },
         "measured": {
           "width": 100,
           "height": 50
         },
-        "selected": false,
+        "selected": true,
         "dragging": false
       },
       {
@@ -537,5 +539,5 @@
     "id": 536
   },
   "id": 152126,
-  "updatedAtTimestamp": 1762609024
+  "updatedAtTimestamp": 1762611177
 }

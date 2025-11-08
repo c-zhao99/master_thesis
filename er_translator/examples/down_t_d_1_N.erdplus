@@ -191,15 +191,17 @@
         },
         "data": {
           "label": "GovID",
-          "types": [],
-          "isSelected": false,
+          "types": {
+            "Unique": true
+          },
+          "isSelected": true,
           "isConnectable": false
         },
         "measured": {
           "width": 100,
           "height": 50
         },
-        "selected": false,
+        "selected": true,
         "dragging": false
       },
       {
@@ -221,14 +223,14 @@
             "minCardinality": "Optional",
             "maxCardinality": "One"
           },
-          "isSelected": true,
+          "isSelected": false,
           "isConnectable": true
         },
         "measured": {
           "width": 100,
           "height": 50
         },
-        "selected": true
+        "selected": false
       },
       {
         "id": "6d605e0c-7bd7-43b7-a243-80094aeac3e6",
@@ -369,5 +371,5 @@
     "id": 536
   },
   "id": 152141,
-  "updatedAtTimestamp": 1762609335
+  "updatedAtTimestamp": 1762611148
 }

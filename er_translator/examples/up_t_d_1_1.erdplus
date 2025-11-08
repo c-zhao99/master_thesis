@@ -323,15 +323,17 @@
         },
         "data": {
           "label": "CustomerID",
-          "types": [],
-          "isSelected": false,
+          "types": {
+            "Unique": true
+          },
+          "isSelected": true,
           "isConnectable": true
         },
         "measured": {
           "width": 100,
           "height": 50
         },
-        "selected": false,
+        "selected": true,
         "dragging": false
       },
       {
@@ -524,9 +526,9 @@
       }
     ],
     "viewport": {
-      "x": 137.63888802855934,
-      "y": 5.602899832799039,
-      "zoom": 0.8705505632961241
+      "x": 148.90145705733255,
+      "y": -20.986983549970375,
+      "zoom": 1
     }
   },
   "name": "up_t_d_1_1",
@@ -537,5 +539,5 @@
     "id": 536
   },
   "id": 152107,
-  "updatedAtTimestamp": 1762608762
+  "updatedAtTimestamp": 1762611229
 }

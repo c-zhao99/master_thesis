@@ -324,7 +324,9 @@
         },
         "data": {
           "label": "CustomerID",
-          "types": [],
+          "types": {
+            "Unique": true
+          },
           "isSelected": false,
           "isConnectable": true
         },
@@ -541,5 +543,5 @@
     "id": 536
   },
   "id": 152150,
-  "updatedAtTimestamp": 1762609495
+  "updatedAtTimestamp": 1762611122
 }
