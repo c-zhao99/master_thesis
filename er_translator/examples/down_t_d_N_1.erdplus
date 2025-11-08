@@ -143,12 +143,12 @@
           "label": "Manage",
           "sourceEntityDetails": {
             "id": "ab5287a0-97e6-4241-a4b3-454000b9d01b",
-            "minCardinality": "Mandatory",
+            "minCardinality": "Optional",
             "maxCardinality": "One"
           },
           "targetEntityDetails": {
             "id": "cc7b8be4-d661-4b08-a24c-6c71da151911",
-            "minCardinality": "Optional",
+            "minCardinality": "Mandatory",
             "maxCardinality": "One"
           },
           "isSelected": false,
@@ -336,7 +336,7 @@
         "data": {
           "id": "caff4b52-9514-4aa0-8fc9-e996f7943204->cc7b8be4-d661-4b08-a24c-6c71da151911",
           "minCardinality": "Optional",
-          "maxCardinality": "Many"
+          "maxCardinality": "One"
         }
       },
       {
@@ -363,13 +363,13 @@
       "zoom": 1
     }
   },
-  "name": "down_t_d_N_1",
+  "name": "down_t_d_1_1",
   "folder": {
     "name": "Diagrams",
     "folderType": 1,
     "depth": 0,
     "id": 536
   },
-  "id": 152144,
-  "updatedAtTimestamp": 1762611143
+  "id": 152138,
+  "updatedAtTimestamp": 1762611153
 }

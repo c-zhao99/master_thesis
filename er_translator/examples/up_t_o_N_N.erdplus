@@ -175,13 +175,13 @@
           "label": "Promote",
           "sourceEntityDetails": {
             "id": "ab5287a0-97e6-4241-a4b3-454000b9d01b",
-            "minCardinality": "Mandatory",
-            "maxCardinality": "One"
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
           },
           "targetEntityDetails": {
             "id": "fe53ffb7-069a-4570-81b7-db57f98646af",
-            "minCardinality": "Optional",
-            "maxCardinality": "Many"
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
           },
           "isSelected": false,
           "isConnectable": true
@@ -204,13 +204,13 @@
           "label": "Manage",
           "sourceEntityDetails": {
             "id": "ab5287a0-97e6-4241-a4b3-454000b9d01b",
-            "minCardinality": "Mandatory",
-            "maxCardinality": "One"
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
           },
           "targetEntityDetails": {
             "id": "cc7b8be4-d661-4b08-a24c-6c71da151911",
-            "minCardinality": "Optional",
-            "maxCardinality": "Many"
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
           },
           "isSelected": false,
           "isConnectable": true
@@ -327,14 +327,14 @@
           "types": {
             "Unique": true
           },
-          "isSelected": true,
+          "isSelected": false,
           "isConnectable": true
         },
         "measured": {
           "width": 100,
           "height": 50
         },
-        "selected": true,
+        "selected": false,
         "dragging": false
       },
       {
@@ -370,8 +370,7 @@
           "type": "Regular",
           "parentId": "cc7b8be4-d661-4b08-a24c-6c71da151911",
           "isSelected": true,
-          "totalSpecialization": true,
-          "supertypeDefinition": "Overlapping"
+          "totalSpecialization": true
         }
       },
       {
@@ -385,8 +384,7 @@
           "type": "Regular",
           "parentId": "cc7b8be4-d661-4b08-a24c-6c71da151911",
           "isSelected": true,
-          "totalSpecialization": true,
-          "supertypeDefinition": "Overlapping"
+          "totalSpecialization": true
         }
       },
       {
@@ -415,7 +413,7 @@
         "data": {
           "id": "9b807f1e-aee7-45e3-b557-f12def26520a->ab5287a0-97e6-4241-a4b3-454000b9d01b(2)",
           "minCardinality": "Optional",
-          "maxCardinality": "Many"
+          "maxCardinality": "One"
         }
       },
       {
@@ -426,7 +424,7 @@
         "data": {
           "id": "9b807f1e-aee7-45e3-b557-f12def26520a->ab5287a0-97e6-4241-a4b3-454000b9d01b(1)",
           "minCardinality": "Optional",
-          "maxCardinality": "Many"
+          "maxCardinality": "One"
         }
       },
       {
@@ -448,7 +446,7 @@
         "data": {
           "id": "f8730412-e67d-4ece-a51a-3be0d217b587->fe53ffb7-069a-4570-81b7-db57f98646af",
           "minCardinality": "Optional",
-          "maxCardinality": "Many"
+          "maxCardinality": "One"
         }
       },
       {
@@ -470,7 +468,7 @@
         "data": {
           "id": "08014a24-2f41-4052-95e0-a5659ebe7c49->cc7b8be4-d661-4b08-a24c-6c71da151911",
           "minCardinality": "Optional",
-          "maxCardinality": "Many"
+          "maxCardinality": "One"
         }
       },
       {
@@ -484,8 +482,7 @@
           "type": "Regular",
           "parentId": "cc7b8be4-d661-4b08-a24c-6c71da151911",
           "isSelected": true,
-          "totalSpecialization": true,
-          "supertypeDefinition": "Overlapping"
+          "totalSpecialization": true
         }
       },
       {
@@ -502,7 +499,7 @@
         "data": {
           "id": "c1001d08-dfea-4f9e-9413-d244014f4ee4->8887799a-3149-42f1-a9f5-89947639b79a",
           "minCardinality": "Optional",
-          "maxCardinality": "Many"
+          "maxCardinality": "One"
         }
       },
       {
@@ -513,7 +510,7 @@
         "data": {
           "id": "c1001d08-dfea-4f9e-9413-d244014f4ee4->84df3c1a-823f-4178-97bc-b755980d6601",
           "minCardinality": "Optional",
-          "maxCardinality": "Many"
+          "maxCardinality": "One"
         }
       },
       {
@@ -535,13 +532,13 @@
       "zoom": 1
     }
   },
-  "name": "up_t_o_N_N",
+  "name": "up_t_d_1_1",
   "folder": {
     "name": "Diagrams",
     "folderType": 1,
     "depth": 0,
     "id": 536
   },
-  "id": 152123,
-  "updatedAtTimestamp": 1762611193
+  "id": 152107,
+  "updatedAtTimestamp": 1762638754
 }

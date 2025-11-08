@@ -175,12 +175,12 @@
           "label": "Promote",
           "sourceEntityDetails": {
             "id": "ab5287a0-97e6-4241-a4b3-454000b9d01b",
-            "minCardinality": "Mandatory",
+            "minCardinality": "Optional",
             "maxCardinality": "One"
           },
           "targetEntityDetails": {
             "id": "fe53ffb7-069a-4570-81b7-db57f98646af",
-            "minCardinality": "Optional",
+            "minCardinality": "Mandatory",
             "maxCardinality": "One"
           },
           "isSelected": false,
@@ -204,12 +204,12 @@
           "label": "Manage",
           "sourceEntityDetails": {
             "id": "ab5287a0-97e6-4241-a4b3-454000b9d01b",
-            "minCardinality": "Mandatory",
+            "minCardinality": "Optional",
             "maxCardinality": "One"
           },
           "targetEntityDetails": {
             "id": "cc7b8be4-d661-4b08-a24c-6c71da151911",
-            "minCardinality": "Optional",
+            "minCardinality": "Mandatory",
             "maxCardinality": "One"
           },
           "isSelected": false,
@@ -327,14 +327,14 @@
           "types": {
             "Unique": true
           },
-          "isSelected": true,
+          "isSelected": false,
           "isConnectable": true
         },
         "measured": {
           "width": 100,
           "height": 50
         },
-        "selected": true,
+        "selected": false,
         "dragging": false
       },
       {
@@ -370,8 +370,7 @@
           "type": "Regular",
           "parentId": "cc7b8be4-d661-4b08-a24c-6c71da151911",
           "isSelected": true,
-          "totalSpecialization": false,
-          "supertypeDefinition": "Overlapping"
+          "totalSpecialization": true
         }
       },
       {
@@ -385,8 +384,7 @@
           "type": "Regular",
           "parentId": "cc7b8be4-d661-4b08-a24c-6c71da151911",
           "isSelected": true,
-          "totalSpecialization": false,
-          "supertypeDefinition": "Overlapping"
+          "totalSpecialization": true
         }
       },
       {
@@ -484,8 +482,7 @@
           "type": "Regular",
           "parentId": "cc7b8be4-d661-4b08-a24c-6c71da151911",
           "isSelected": true,
-          "totalSpecialization": false,
-          "supertypeDefinition": "Overlapping"
+          "totalSpecialization": true
         }
       },
       {
@@ -535,13 +532,13 @@
       "zoom": 1
     }
   },
-  "name": "up_p_o_1_1",
+  "name": "up_t_d_1_1",
   "folder": {
     "name": "Diagrams",
     "folderType": 1,
     "depth": 0,
     "id": 536
   },
-  "id": 152131,
-  "updatedAtTimestamp": 1762611172
+  "id": 152107,
+  "updatedAtTimestamp": 1762638754
 }

@@ -69,8 +69,8 @@
         "parentId": "702ef538-3589-405c-9be4-69b60ba5f5ab",
         "type": "Attribute",
         "position": {
-          "x": 144,
-          "y": -97
+          "x": 146,
+          "y": -100
         },
         "data": {
           "label": "Email",
@@ -109,8 +109,8 @@
       }
     ],
     "viewport": {
-      "x": -25.12310601229376,
-      "y": 15,
+      "x": 49.5,
+      "y": 90.12310601229376,
       "zoom": 1
     }
   },
@@ -122,5 +122,5 @@
     "id": 536
   },
   "id": 152165,
-  "updatedAtTimestamp": 1762610213
+  "updatedAtTimestamp": 1762637224
 }

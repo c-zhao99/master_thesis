@@ -174,12 +174,12 @@
           "label": "Promote",
           "sourceEntityDetails": {
             "id": "ab5287a0-97e6-4241-a4b3-454000b9d01b",
-            "minCardinality": "Mandatory",
+            "minCardinality": "Optional",
             "maxCardinality": "One"
           },
           "targetEntityDetails": {
             "id": "fe53ffb7-069a-4570-81b7-db57f98646af",
-            "minCardinality": "Optional",
+            "minCardinality": "Mandatory",
             "maxCardinality": "One"
           },
           "isSelected": false,
@@ -203,12 +203,12 @@
           "label": "Manage",
           "sourceEntityDetails": {
             "id": "ab5287a0-97e6-4241-a4b3-454000b9d01b",
-            "minCardinality": "Mandatory",
+            "minCardinality": "Optional",
             "maxCardinality": "One"
           },
           "targetEntityDetails": {
             "id": "cc7b8be4-d661-4b08-a24c-6c71da151911",
-            "minCardinality": "Optional",
+            "minCardinality": "Mandatory",
             "maxCardinality": "One"
           },
           "isSelected": false,
@@ -326,14 +326,14 @@
           "types": {
             "Unique": true
           },
-          "isSelected": true,
+          "isSelected": false,
           "isConnectable": true
         },
         "measured": {
           "width": 100,
           "height": 50
         },
-        "selected": true,
+        "selected": false,
         "dragging": false
       },
       {
@@ -539,5 +539,5 @@
     "id": 536
   },
   "id": 152107,
-  "updatedAtTimestamp": 1762611229
+  "updatedAtTimestamp": 1762638754
 }

@@ -49,8 +49,8 @@
         "parentId": "702ef538-3589-405c-9be4-69b60ba5f5ab",
         "type": "Attribute",
         "position": {
-          "x": 0.24621202458752123,
-          "y": -101.24621202458749
+          "x": 39.24621202458752,
+          "y": -108.24621202458749
         },
         "data": {
           "label": "BirthYear",
@@ -61,7 +61,7 @@
           "width": 100,
           "height": 50
         },
-        "selected": false,
+        "selected": true,
         "dragging": false
       },
       {
@@ -187,8 +187,8 @@
       }
     ],
     "viewport": {
-      "x": -28.74621202458752,
-      "y": 56.5,
+      "x": -29.24621202458752,
+      "y": 58.37689398770627,
       "zoom": 1
     }
   },
@@ -200,5 +200,5 @@
     "id": 536
   },
   "id": 152166,
-  "updatedAtTimestamp": 1762611073
+  "updatedAtTimestamp": 1762637230
 }
