@@ -1,0 +1,166 @@
+{
+  "diagramType": 1,
+  "data": {
+    "nodes": [
+      {
+        "id": "d654e231-5652-447e-9f13-75f38a8628fe",
+        "type": "Entity",
+        "position": {
+          "x": 484,
+          "y": 248
+        },
+        "data": {
+          "label": "Person",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "067e01a9-9cda-4779-ba65-c3f32352e527",
+        "type": "Entity",
+        "position": {
+          "x": 834,
+          "y": 248
+        },
+        "data": {
+          "label": "Passport",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "20a1e3a7-efc8-4292-9142-16a0dab14a03",
+        "type": "Relationship",
+        "position": {
+          "x": 657.5,
+          "y": 250
+        },
+        "data": {
+          "label": "Own",
+          "sourceEntityDetails": {
+            "id": "d654e231-5652-447e-9f13-75f38a8628fe",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "067e01a9-9cda-4779-ba65-c3f32352e527",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "isSelected": false,
+          "isConnectable": true
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "ec8d34f2-edd8-4261-a5fc-d2223674d96f",
+        "parentId": "d654e231-5652-447e-9f13-75f38a8628fe",
+        "type": "Attribute",
+        "position": {
+          "x": -6.429395695523604e-15,
+          "y": -105
+        },
+        "data": {
+          "label": "SSN",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        }
+      },
+      {
+        "id": "4a9be936-a2ec-48d1-bf9f-02dca0a9676b",
+        "parentId": "067e01a9-9cda-4779-ba65-c3f32352e527",
+        "type": "Attribute",
+        "position": {
+          "x": -6.429395695523604e-15,
+          "y": -105
+        },
+        "data": {
+          "label": "PassportNumber",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "20a1e3a7-efc8-4292-9142-16a0dab14a03->d654e231-5652-447e-9f13-75f38a8628fe;d654e231-5652-447e-9f13-75f38a8628fe->067e01a9-9cda-4779-ba65-c3f32352e527",
+        "type": "Relationship",
+        "source": "20a1e3a7-efc8-4292-9142-16a0dab14a03",
+        "target": "d654e231-5652-447e-9f13-75f38a8628fe",
+        "data": {
+          "id": "20a1e3a7-efc8-4292-9142-16a0dab14a03->d654e231-5652-447e-9f13-75f38a8628fe",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "20a1e3a7-efc8-4292-9142-16a0dab14a03->067e01a9-9cda-4779-ba65-c3f32352e527;d654e231-5652-447e-9f13-75f38a8628fe->067e01a9-9cda-4779-ba65-c3f32352e527",
+        "type": "Relationship",
+        "source": "20a1e3a7-efc8-4292-9142-16a0dab14a03",
+        "target": "067e01a9-9cda-4779-ba65-c3f32352e527",
+        "data": {
+          "id": "20a1e3a7-efc8-4292-9142-16a0dab14a03->067e01a9-9cda-4779-ba65-c3f32352e527",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "56ad3bc5-4a03-4f88-a653-df78604965c4",
+        "type": "Attribute",
+        "source": "d654e231-5652-447e-9f13-75f38a8628fe",
+        "target": "ec8d34f2-edd8-4261-a5fc-d2223674d96f"
+      },
+      {
+        "id": "92d06e26-3782-48d8-8ea8-5612dd140f0a",
+        "type": "Attribute",
+        "source": "067e01a9-9cda-4779-ba65-c3f32352e527",
+        "target": "4a9be936-a2ec-48d1-bf9f-02dca0a9676b"
+      }
+    ],
+    "viewport": {
+      "x": -2,
+      "y": 27.5,
+      "zoom": 1
+    }
+  },
+  "name": "relantionship_1_1",
+  "folder": {
+    "name": "Diagrams",
+    "folderType": 1,
+    "depth": 0,
+    "id": 536
+  },
+  "id": 152181,
+  "updatedAtTimestamp": 1762610908
+}

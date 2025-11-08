@@ -1,0 +1,126 @@
+{
+  "diagramType": 1,
+  "data": {
+    "nodes": [
+      {
+        "id": "702ef538-3589-405c-9be4-69b60ba5f5ab",
+        "type": "Entity",
+        "position": {
+          "x": 645,
+          "y": 235
+        },
+        "data": {
+          "label": "Person",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "58d348af-76c8-4d9c-80e3-59386348d333",
+        "parentId": "702ef538-3589-405c-9be4-69b60ba5f5ab",
+        "type": "Attribute",
+        "position": {
+          "x": -129,
+          "y": -101
+        },
+        "data": {
+          "label": "SSN",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "47846aa6-6755-4fbb-944e-c23db23522f7",
+        "parentId": "702ef538-3589-405c-9be4-69b60ba5f5ab",
+        "type": "Attribute",
+        "position": {
+          "x": 0.24621202458752123,
+          "y": -101.24621202458749
+        },
+        "data": {
+          "label": "BirthYear",
+          "types": [],
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "6c369c50-ca0d-4485-9793-d011e0447a6b",
+        "parentId": "702ef538-3589-405c-9be4-69b60ba5f5ab",
+        "type": "Attribute",
+        "position": {
+          "x": 144,
+          "y": -97
+        },
+        "data": {
+          "label": "Email",
+          "types": {
+            "Optional": false,
+            "Multivalued": true
+          },
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": true,
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "id": "ffc4b103-c1f7-4f7f-ba63-be156bbe3cbd",
+        "type": "Attribute",
+        "source": "702ef538-3589-405c-9be4-69b60ba5f5ab",
+        "target": "58d348af-76c8-4d9c-80e3-59386348d333"
+      },
+      {
+        "id": "72370c2f-f483-4672-a99e-5d088d376869",
+        "type": "Attribute",
+        "source": "702ef538-3589-405c-9be4-69b60ba5f5ab",
+        "target": "47846aa6-6755-4fbb-944e-c23db23522f7"
+      },
+      {
+        "id": "4bd46a6f-0cd7-4d35-b47c-d5fcfc21a410",
+        "type": "Attribute",
+        "source": "702ef538-3589-405c-9be4-69b60ba5f5ab",
+        "target": "6c369c50-ca0d-4485-9793-d011e0447a6b"
+      }
+    ],
+    "viewport": {
+      "x": -25.12310601229376,
+      "y": 15,
+      "zoom": 1
+    }
+  },
+  "name": "multi_value_attribute",
+  "folder": {
+    "name": "Diagrams",
+    "folderType": 1,
+    "depth": 0,
+    "id": 536
+  },
+  "id": 152165,
+  "updatedAtTimestamp": 1762610213
+}

@@ -1,0 +1,168 @@
+{
+  "diagramType": 1,
+  "data": {
+    "nodes": [
+      {
+        "id": "831f5b9c-396f-4042-a9da-ab220e6c9441",
+        "type": "Entity",
+        "position": {
+          "x": 421,
+          "y": 256
+        },
+        "data": {
+          "label": "Person",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "fc461dd4-4046-455b-8d57-c8565b9185ca",
+        "type": "Entity",
+        "position": {
+          "x": 727,
+          "y": 254
+        },
+        "data": {
+          "label": "Car",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "05953993-0c63-4a39-b1cc-e9e22dee4d04",
+        "parentId": "fc461dd4-4046-455b-8d57-c8565b9185ca",
+        "type": "Attribute",
+        "position": {
+          "x": -6.429395695523604e-15,
+          "y": -105
+        },
+        "data": {
+          "label": "ChassisNumber",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false,
+          "isConnectable": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        }
+      },
+      {
+        "id": "556d2abd-02dc-4dbf-8786-3be11f0468ee",
+        "parentId": "831f5b9c-396f-4042-a9da-ab220e6c9441",
+        "type": "Attribute",
+        "position": {
+          "x": -6.429395695523604e-15,
+          "y": -105
+        },
+        "data": {
+          "label": "SSN",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false,
+          "isConnectable": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        }
+      },
+      {
+        "id": "6afb1b20-3305-46a3-aa3c-af42e4dc80f9",
+        "type": "Relationship",
+        "position": {
+          "x": 570,
+          "y": 255.5
+        },
+        "data": {
+          "label": "Owns",
+          "sourceEntityDetails": {
+            "id": "831f5b9c-396f-4042-a9da-ab220e6c9441",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
+          },
+          "targetEntityDetails": {
+            "id": "fc461dd4-4046-455b-8d57-c8565b9185ca",
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
+          },
+          "isSelected": false,
+          "isConnectable": true
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "id": "e49ae258-b3b7-486f-ac92-6e4aaf68427f",
+        "type": "Attribute",
+        "source": "fc461dd4-4046-455b-8d57-c8565b9185ca",
+        "target": "05953993-0c63-4a39-b1cc-e9e22dee4d04"
+      },
+      {
+        "id": "1e3c8765-2f1e-41bb-abde-05e4d1c77560",
+        "type": "Attribute",
+        "source": "831f5b9c-396f-4042-a9da-ab220e6c9441",
+        "target": "556d2abd-02dc-4dbf-8786-3be11f0468ee"
+      },
+      {
+        "id": "6afb1b20-3305-46a3-aa3c-af42e4dc80f9->831f5b9c-396f-4042-a9da-ab220e6c9441;831f5b9c-396f-4042-a9da-ab220e6c9441->fc461dd4-4046-455b-8d57-c8565b9185ca",
+        "type": "Relationship",
+        "source": "6afb1b20-3305-46a3-aa3c-af42e4dc80f9",
+        "target": "831f5b9c-396f-4042-a9da-ab220e6c9441",
+        "data": {
+          "id": "6afb1b20-3305-46a3-aa3c-af42e4dc80f9->831f5b9c-396f-4042-a9da-ab220e6c9441",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "One"
+        }
+      },
+      {
+        "id": "6afb1b20-3305-46a3-aa3c-af42e4dc80f9->fc461dd4-4046-455b-8d57-c8565b9185ca;831f5b9c-396f-4042-a9da-ab220e6c9441->fc461dd4-4046-455b-8d57-c8565b9185ca",
+        "type": "Relationship",
+        "source": "6afb1b20-3305-46a3-aa3c-af42e4dc80f9",
+        "target": "fc461dd4-4046-455b-8d57-c8565b9185ca",
+        "data": {
+          "id": "6afb1b20-3305-46a3-aa3c-af42e4dc80f9->fc461dd4-4046-455b-8d57-c8565b9185ca",
+          "minCardinality": "Optional",
+          "maxCardinality": "Many"
+        }
+      }
+    ],
+    "viewport": {
+      "x": 1,
+      "y": 29.5,
+      "zoom": 1
+    }
+  },
+  "name": "relationship_1_N",
+  "folder": {
+    "name": "Diagrams",
+    "folderType": 1,
+    "depth": 0,
+    "id": 536
+  },
+  "id": 152175,
+  "updatedAtTimestamp": 1762610570
+}

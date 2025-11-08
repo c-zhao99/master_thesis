@@ -1,0 +1,204 @@
+{
+  "diagramType": 1,
+  "data": {
+    "nodes": [
+      {
+        "id": "702ef538-3589-405c-9be4-69b60ba5f5ab",
+        "type": "Entity",
+        "position": {
+          "x": 645,
+          "y": 235
+        },
+        "data": {
+          "label": "Person",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "58d348af-76c8-4d9c-80e3-59386348d333",
+        "parentId": "702ef538-3589-405c-9be4-69b60ba5f5ab",
+        "type": "Attribute",
+        "position": {
+          "x": -128,
+          "y": -105
+        },
+        "data": {
+          "label": "SSN",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "47846aa6-6755-4fbb-944e-c23db23522f7",
+        "parentId": "702ef538-3589-405c-9be4-69b60ba5f5ab",
+        "type": "Attribute",
+        "position": {
+          "x": 0.24621202458752123,
+          "y": -101.24621202458749
+        },
+        "data": {
+          "label": "BirthYear",
+          "types": [],
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "fe330edb-590d-432f-a3e6-05c969b193ca",
+        "parentId": "702ef538-3589-405c-9be4-69b60ba5f5ab",
+        "type": "Attribute",
+        "position": {
+          "x": 158.24621202458752,
+          "y": -0.7537879754125356
+        },
+        "data": {
+          "label": "WorkAddress",
+          "types": {
+            "Composite": true,
+            "Multivalued": true
+          },
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "6c55d7c1-4a38-4f20-aec9-5ebc80c1e13c",
+        "parentId": "fe330edb-590d-432f-a3e6-05c969b193ca",
+        "type": "Attribute",
+        "position": {
+          "x": 136,
+          "y": -70
+        },
+        "data": {
+          "label": "Street",
+          "types": [],
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "ecb82d52-fba8-4afe-a096-946ad0f4fc4b",
+        "parentId": "fe330edb-590d-432f-a3e6-05c969b193ca",
+        "type": "Attribute",
+        "position": {
+          "x": 142.24621202458752,
+          "y": 1.7537879754125356
+        },
+        "data": {
+          "label": "HouseNumber",
+          "types": [],
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "7f060c01-6c23-48a9-9820-8ab56e9d9673",
+        "parentId": "fe330edb-590d-432f-a3e6-05c969b193ca",
+        "type": "Attribute",
+        "position": {
+          "x": 133,
+          "y": 68
+        },
+        "data": {
+          "label": "ZipCode",
+          "types": [],
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "id": "ffc4b103-c1f7-4f7f-ba63-be156bbe3cbd",
+        "type": "Attribute",
+        "source": "702ef538-3589-405c-9be4-69b60ba5f5ab",
+        "target": "58d348af-76c8-4d9c-80e3-59386348d333"
+      },
+      {
+        "id": "72370c2f-f483-4672-a99e-5d088d376869",
+        "type": "Attribute",
+        "source": "702ef538-3589-405c-9be4-69b60ba5f5ab",
+        "target": "47846aa6-6755-4fbb-944e-c23db23522f7"
+      },
+      {
+        "id": "ec347e10-4f0b-4432-88c5-63c216befd0c",
+        "type": "Attribute",
+        "source": "702ef538-3589-405c-9be4-69b60ba5f5ab",
+        "target": "fe330edb-590d-432f-a3e6-05c969b193ca"
+      },
+      {
+        "id": "0c098a3a-3e86-48be-be71-4a884acfabcd",
+        "type": "Attribute",
+        "source": "fe330edb-590d-432f-a3e6-05c969b193ca",
+        "target": "6c55d7c1-4a38-4f20-aec9-5ebc80c1e13c"
+      },
+      {
+        "id": "38040420-0442-4263-9b46-a12c7b2c0b01",
+        "type": "Attribute",
+        "source": "fe330edb-590d-432f-a3e6-05c969b193ca",
+        "target": "ecb82d52-fba8-4afe-a096-946ad0f4fc4b"
+      },
+      {
+        "id": "ce4674a0-64fa-4dca-b57c-967f63b4643a",
+        "type": "Attribute",
+        "source": "fe330edb-590d-432f-a3e6-05c969b193ca",
+        "target": "7f060c01-6c23-48a9-9820-8ab56e9d9673"
+      }
+    ],
+    "viewport": {
+      "x": -28.74621202458752,
+      "y": 56.5,
+      "zoom": 1
+    }
+  },
+  "name": "multi_value_composite_attribute",
+  "folder": {
+    "name": "Diagrams",
+    "folderType": 1,
+    "depth": 0,
+    "id": 536
+  },
+  "id": 152166,
+  "updatedAtTimestamp": 1762611073
+}

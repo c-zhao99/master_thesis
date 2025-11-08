@@ -1,0 +1,172 @@
+{
+  "diagramType": 1,
+  "data": {
+    "nodes": [
+      {
+        "id": "7b170b95-a9a2-42dd-8eed-740dcd6b37e6",
+        "type": "Entity",
+        "position": {
+          "x": 817,
+          "y": 245
+        },
+        "data": {
+          "label": "Floor",
+          "type": "Weak",
+          "isConnectable": false,
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "c25d7a2f-30e6-4b2f-b89f-149b1ea9e0f7",
+        "parentId": "7b170b95-a9a2-42dd-8eed-740dcd6b37e6",
+        "type": "Attribute",
+        "position": {
+          "x": -6.429395695523604e-15,
+          "y": -105
+        },
+        "data": {
+          "label": "Number",
+          "types": {
+            "Unique": false,
+            "Partially Unique": true
+          },
+          "isSelected": false,
+          "isConnectable": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false
+      },
+      {
+        "id": "b5a12aa7-67c7-48ac-b5ee-f02d96423eff",
+        "type": "Entity",
+        "position": {
+          "x": 449,
+          "y": 246
+        },
+        "data": {
+          "label": "Building",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "bd969ddc-44df-4c28-a6f2-e6b4a56e6d27",
+        "parentId": "b5a12aa7-67c7-48ac-b5ee-f02d96423eff",
+        "type": "Attribute",
+        "position": {
+          "x": -6.429395695523604e-15,
+          "y": -105
+        },
+        "data": {
+          "label": "BuildingID",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false,
+          "isConnectable": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false
+      },
+      {
+        "id": "ca53873e-086f-4709-ba9b-18d349346e84",
+        "type": "Relationship",
+        "position": {
+          "x": 632.5,
+          "y": 245.5
+        },
+        "data": {
+          "label": "Contains",
+          "sourceEntityDetails": {
+            "id": "b5a12aa7-67c7-48ac-b5ee-f02d96423eff",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "Many"
+          },
+          "targetEntityDetails": {
+            "id": "7b170b95-a9a2-42dd-8eed-740dcd6b37e6",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "Many"
+          },
+          "isSelected": false,
+          "isConnectable": true,
+          "isIdentifying": true
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "id": "92322232-4bd0-4285-9b52-4419dfd8f732",
+        "type": "Attribute",
+        "source": "7b170b95-a9a2-42dd-8eed-740dcd6b37e6",
+        "target": "c25d7a2f-30e6-4b2f-b89f-149b1ea9e0f7"
+      },
+      {
+        "id": "2f26d4ad-e4a6-4c75-8c7d-287a34dcf4a4",
+        "type": "Attribute",
+        "source": "b5a12aa7-67c7-48ac-b5ee-f02d96423eff",
+        "target": "bd969ddc-44df-4c28-a6f2-e6b4a56e6d27"
+      },
+      {
+        "id": "ca53873e-086f-4709-ba9b-18d349346e84->b5a12aa7-67c7-48ac-b5ee-f02d96423eff;b5a12aa7-67c7-48ac-b5ee-f02d96423eff->7b170b95-a9a2-42dd-8eed-740dcd6b37e6",
+        "type": "Relationship",
+        "source": "ca53873e-086f-4709-ba9b-18d349346e84",
+        "target": "b5a12aa7-67c7-48ac-b5ee-f02d96423eff",
+        "data": {
+          "id": "ca53873e-086f-4709-ba9b-18d349346e84->b5a12aa7-67c7-48ac-b5ee-f02d96423eff",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "ca53873e-086f-4709-ba9b-18d349346e84->7b170b95-a9a2-42dd-8eed-740dcd6b37e6;b5a12aa7-67c7-48ac-b5ee-f02d96423eff->7b170b95-a9a2-42dd-8eed-740dcd6b37e6",
+        "type": "Relationship",
+        "source": "ca53873e-086f-4709-ba9b-18d349346e84",
+        "target": "7b170b95-a9a2-42dd-8eed-740dcd6b37e6",
+        "data": {
+          "id": "ca53873e-086f-4709-ba9b-18d349346e84->7b170b95-a9a2-42dd-8eed-740dcd6b37e6",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "Many"
+        }
+      }
+    ],
+    "viewport": {
+      "x": 1,
+      "y": 38.5,
+      "zoom": 1
+    }
+  },
+  "name": "weak_entity",
+  "folder": {
+    "name": "Diagrams",
+    "folderType": 1,
+    "depth": 0,
+    "id": 536
+  },
+  "id": 152169,
+  "updatedAtTimestamp": 1762610442
+}

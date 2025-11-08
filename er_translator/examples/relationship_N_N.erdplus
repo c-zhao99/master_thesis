@@ -1,0 +1,168 @@
+{
+  "diagramType": 1,
+  "data": {
+    "nodes": [
+      {
+        "id": "2a6e3ee9-8249-4a54-82af-79ae216e4f94",
+        "type": "Entity",
+        "position": {
+          "x": 480,
+          "y": 254
+        },
+        "data": {
+          "label": "Student",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "6d4d018a-8679-40a1-8f9f-ad3ea2dcb545",
+        "type": "Entity",
+        "position": {
+          "x": 822,
+          "y": 254
+        },
+        "data": {
+          "label": "Course",
+          "type": "Regular",
+          "isConnectable": false,
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "629de033-9a96-44c6-b62b-53e22025e872",
+        "type": "Relationship",
+        "position": {
+          "x": 649.5,
+          "y": 253.5
+        },
+        "data": {
+          "label": "Enroll",
+          "sourceEntityDetails": {
+            "id": "2a6e3ee9-8249-4a54-82af-79ae216e4f94",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "Many"
+          },
+          "targetEntityDetails": {
+            "id": "6d4d018a-8679-40a1-8f9f-ad3ea2dcb545",
+            "minCardinality": "Mandatory",
+            "maxCardinality": "Many"
+          },
+          "isSelected": false,
+          "isConnectable": true
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "8137e77e-d0fb-4a1c-bbe4-82da00d70aa3",
+        "parentId": "2a6e3ee9-8249-4a54-82af-79ae216e4f94",
+        "type": "Attribute",
+        "position": {
+          "x": -6.429395695523604e-15,
+          "y": -105
+        },
+        "data": {
+          "label": "StudentID",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false
+      },
+      {
+        "id": "d62b71a7-a805-4193-8d3f-d9596db9b01e",
+        "parentId": "6d4d018a-8679-40a1-8f9f-ad3ea2dcb545",
+        "type": "Attribute",
+        "position": {
+          "x": -6.429395695523604e-15,
+          "y": -105
+        },
+        "data": {
+          "label": "CourseID",
+          "types": {
+            "Unique": true
+          },
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false
+      }
+    ],
+    "edges": [
+      {
+        "id": "629de033-9a96-44c6-b62b-53e22025e872->2a6e3ee9-8249-4a54-82af-79ae216e4f94;2a6e3ee9-8249-4a54-82af-79ae216e4f94->6d4d018a-8679-40a1-8f9f-ad3ea2dcb545",
+        "type": "Relationship",
+        "source": "629de033-9a96-44c6-b62b-53e22025e872",
+        "target": "2a6e3ee9-8249-4a54-82af-79ae216e4f94",
+        "data": {
+          "id": "629de033-9a96-44c6-b62b-53e22025e872->2a6e3ee9-8249-4a54-82af-79ae216e4f94",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "629de033-9a96-44c6-b62b-53e22025e872->6d4d018a-8679-40a1-8f9f-ad3ea2dcb545;2a6e3ee9-8249-4a54-82af-79ae216e4f94->6d4d018a-8679-40a1-8f9f-ad3ea2dcb545",
+        "type": "Relationship",
+        "source": "629de033-9a96-44c6-b62b-53e22025e872",
+        "target": "6d4d018a-8679-40a1-8f9f-ad3ea2dcb545",
+        "data": {
+          "id": "629de033-9a96-44c6-b62b-53e22025e872->6d4d018a-8679-40a1-8f9f-ad3ea2dcb545",
+          "minCardinality": "Mandatory",
+          "maxCardinality": "Many"
+        }
+      },
+      {
+        "id": "8b268d73-8bbe-492d-85fd-227bca1654d2",
+        "type": "Attribute",
+        "source": "2a6e3ee9-8249-4a54-82af-79ae216e4f94",
+        "target": "8137e77e-d0fb-4a1c-bbe4-82da00d70aa3"
+      },
+      {
+        "id": "c05130e7-24ba-48f0-8551-c98f8a4adf09",
+        "type": "Attribute",
+        "source": "6d4d018a-8679-40a1-8f9f-ad3ea2dcb545",
+        "target": "d62b71a7-a805-4193-8d3f-d9596db9b01e"
+      }
+    ],
+    "viewport": {
+      "x": 2,
+      "y": 29.5,
+      "zoom": 1
+    }
+  },
+  "name": "relationship_N_N",
+  "folder": {
+    "name": "Diagrams",
+    "folderType": 1,
+    "depth": 0,
+    "id": 536
+  },
+  "id": 152195,
+  "updatedAtTimestamp": 1762611032
+}
