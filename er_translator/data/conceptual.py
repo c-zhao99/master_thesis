@@ -242,6 +242,9 @@ class Attribute:
     @property
     def is_unique(self):
         return self._is_unique
+
+    def set_cardinality(self, cardinality: Cardinality):
+        self._cardinality = cardinality
     
     def deep_copy(self) -> "Attribute":
         """Create a deep copy of this Attribute."""

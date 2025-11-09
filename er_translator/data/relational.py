@@ -16,6 +16,12 @@ class Attribute:
         self.name = name
         self.is_optional = is_optional
         self.is_unique = is_unique
+
+    def set_name(self, name: str) -> None:
+        self.name = name
+
+    def set_optional(self, is_optional: bool) -> None:
+        self.is_optional = is_optional
     
 class ForeignKey(Attribute):
     def __init__(self, name: str, is_optional: bool, is_unique: bool, 
