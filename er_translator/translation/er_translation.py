@@ -4,7 +4,7 @@ from ..data.choices import COMPOSITE_ATTRIBUTE_CHOICE, RELATIONSHIP_CHOICE, HIER
 from ..data.hierachy_checks import HierarchyChecks
 from ..translation.hierarchy_translation import HierachyTranslator
 from ..translation.sql_generator import SQLGenerator
-from ..utils.utils import get_all_father_entities, retrieve_connected_relationships, retrieve_children_names, retrieve_all_hierarchy_relationships
+from ..utils.utils import get_all_father_entities, retrieve_connected_relationships, retrieve_children_names, retrieve_all_hierarchy_relationships, change_relationships_entity
 
 class ERTranslator:
     def __init__(self, entities: dict[str, Entity], relationships: dict[str, Relationship]):
@@ -38,6 +38,8 @@ class ERTranslator:
                 table_name = relationship.entity_from
                 if table_name in self._hierarchy_changes:
                     table = self._tables[self._hierarchy_changes[table_name]]
+                else:
+                    table = self._tables[table_name]
                 self.translate_recursive_relationship(table, relationship, table_name)
             else:
                 if relationship_name in relationship_choices:
@@ -113,6 +115,7 @@ class ERTranslator:
             elif choice == COMPOSITE_ATTRIBUTE_CHOICE.KEEP_SIMPLE_ATTRIBUTES:
                 simple_attributes = attribute.simple_attributes
                 for simple_attribute in simple_attributes:
+                    simple_attribute.set_cardinality(attribute.cardinality)
                     self._normalize_multi_value_attribute(entity, simple_attribute, is_identifier)
             
             # Remove the composite attribute after processing
@@ -161,7 +164,7 @@ class ERTranslator:
             new_entity.add_identifier(attribute)
         else:
             new_id_cardinality = Cardinality(MinimumCardinality.ONE, MaximumCardinality.ONE)
-            new_id = C_Attribute(attribute.name + "_id", new_id_cardinality, True)
+            new_id = C_Attribute(attribute.name + "_ID", new_id_cardinality, True)
             new_entity = Entity(entity.name + attribute.name)
             new_entity.add_identifier(new_id)
             new_entity.add_attribute(attribute)
@@ -174,7 +177,7 @@ class ERTranslator:
         
         self._entities[new_entity.name] = new_entity
         new_relationship = Relationship(
-            entity.name + "_AND_" + attribute.name,
+            entity.name + "_" + attribute.name,
             entity.name,
             new_entity.name,
             attribute.cardinality,
@@ -287,6 +290,7 @@ class ERTranslator:
                         elif parent_entity.name == relationship.entity_to:
                             relationship_copy.set_entity_to(child_name)
                         relationship_copy.set_name(relationship_copy.name + "_" + relationship_copy.entity_from + "_" + relationship_copy.entity_to)
+                        self._hierarchy_changes[relationship_copy.name] = relationship.name
                         self._relationships[relationship_copy.name] = relationship_copy
                 for relationship_name in parent_relationships:
                     del self._relationships[relationship_name]
@@ -343,10 +347,27 @@ class ERTranslator:
         return choices, default_choices
 
     def translate_recursive_relationship(self, table: Table, relationship: Relationship, table_name: str) -> None:
+        relationship_name = relationship.name
+        if relationship.name in self._hierarchy_changes:
+            relationship_name = self._hierarchy_changes[relationship.name]
         if relationship.cardinality_from.max_cardinality != relationship.cardinality_to.max_cardinality:
             # add foreign key
+            hierarchy_relationships = retrieve_all_hierarchy_relationships(self._entities.values(), self._relationships)    
             for key in table.primary_keys:
-                table.add_foreign_key(ForeignKey(table_name + "_" + key.name, key.is_optional, key.is_unique, table, key))
+                is_optional = key.is_optional
+                if relationship.name in hierarchy_relationships:
+                    is_optional = True
+                
+                table.add_foreign_key(ForeignKey(relationship_name + "_" + table_name + "_" + key.name, is_optional, key.is_unique, table, key))
+            is_relationship_optional = relationship.cardinality_from.min_cardinality == MinimumCardinality.ZERO
+            for attribute in relationship.attributes:
+                new_attribute = self._translate_attribute(attribute)
+                new_attribute.set_name(relationship_name + "_" + table_name + "_" + attribute.name)
+                is_optional = is_relationship_optional
+                if relationship.name in hierarchy_relationships:
+                    is_optional = True
+                new_attribute.set_optional(is_optional)
+                table.add_attribute(new_attribute)
         else:
             # create new table
             new_attribues = []
@@ -355,14 +376,14 @@ class ERTranslator:
 
             new_primary_keys = []
             for key in table.primary_keys:
-                new_primary_keys.append(R_Attribute(table_name + "_" + key.name + "_A", key.is_optional, key.is_unique))
-                new_primary_keys.append(R_Attribute(table_name + "_" + key.name + "_B", key.is_optional, key.is_unique))
+                new_primary_keys.append(R_Attribute(relationship_name + "_" + table_name + "_" + key.name + "_A", key.is_optional, key.is_unique))
+                new_primary_keys.append(R_Attribute(relationship_name + "_" + table_name + "_" + key.name + "_B", key.is_optional, key.is_unique))
 
-            new_table = Table(relationship.name, new_primary_keys, new_attribues)
+            new_table = Table(relationship_name, new_primary_keys, new_attribues)
 
             for key in table.primary_keys:
-                new_table.add_foreign_key(ForeignKey(table_name + "_" + key.name + "_A", key.is_optional, key.is_unique, table, key))
-                new_table.add_foreign_key(ForeignKey(table_name + "_" + key.name + "_B", key.is_optional, key.is_unique, table, key))
+                new_table.add_foreign_key(ForeignKey(relationship_name + "_" + table_name + "_" + key.name + "_A", key.is_optional, key.is_unique, table, key))
+                new_table.add_foreign_key(ForeignKey(relationship_name + "_" + table_name + "_" + key.name + "_B", key.is_optional, key.is_unique, table, key))
             
             self._tables[new_table.name] = new_table
 
@@ -406,24 +427,26 @@ class ERTranslator:
         new_attribues = []
         for attribute in relationship.attributes:
             new_attribues.append(self._translate_attribute(attribute))
-
+        relationship_name = relationship.name
+        if relationship.name in self._hierarchy_changes:
+            relationship_name = self._hierarchy_changes[relationship.name]
         new_primary_keys = []
         for key in table_from.primary_keys:
-            new_pk = R_Attribute(table_from_name + "_" + key.name, key.is_optional, key.is_unique)
+            new_pk = R_Attribute(relationship_name + "_" + table_from_name + "_" + key.name, key.is_optional, key.is_unique)
             new_primary_keys.append(new_pk)
             
         for key in table_to.primary_keys:
-            new_pk = R_Attribute(table_to_name + "_" + key.name, key.is_optional, key.is_unique)
+            new_pk = R_Attribute(relationship_name + "_" + table_to_name + "_" + key.name, key.is_optional, key.is_unique)
             new_primary_keys.append(new_pk)
 
-        new_table = Table(relationship.name, new_primary_keys, new_attribues)
+        new_table = Table(relationship_name, new_primary_keys, new_attribues)
 
 
         for key in table_from.primary_keys:
-            new_table.add_foreign_key(ForeignKey(table_from_name + "_" + key.name, key.is_optional, key.is_unique, table_from, key))
+            new_table.add_foreign_key(ForeignKey(relationship_name + "_" + table_from_name + "_" + key.name, key.is_optional, key.is_unique, table_from, key))
             
         for key in table_to.primary_keys:
-            new_table.add_foreign_key(ForeignKey(table_to_name + "_" + key.name, key.is_optional, key.is_unique, table_to, key))
+            new_table.add_foreign_key(ForeignKey(relationship_name + "_" + table_to_name + "_" + key.name, key.is_optional, key.is_unique, table_to, key))
         
         self._tables[new_table.name] = new_table
 
@@ -471,20 +494,40 @@ class ERTranslator:
     
     def _add_foreign_keys_and_attributes(self, main_table: Table, referenced_table: Table, relationship: Relationship, main_table_name: str, referenced_table_name: str) -> None:
         relationship_attributes = relationship.attributes
+        relationship_name = relationship.name
+        if relationship.name in self._hierarchy_changes:
+            relationship_name = self._hierarchy_changes[relationship.name]
+        hierarchy_relationships = retrieve_all_hierarchy_relationships(self._entities.values(), self._relationships)
         for key in referenced_table.primary_keys:
-            main_table.add_foreign_key(ForeignKey(referenced_table_name + "_" + key.name, key.is_optional, key.is_unique, referenced_table, key))
+            is_optional = key.is_optional
+            if relationship.name in hierarchy_relationships:
+                is_optional = True
+            main_table.add_foreign_key(ForeignKey(relationship_name + "_" + referenced_table_name + "_" + key.name, is_optional, key.is_unique, referenced_table, key))
             
         for attribute in relationship_attributes:
             new_attribute = self._translate_attribute(attribute)
-            new_attribute.name = main_table_name + "_" + attribute.name
+            new_attribute.set_name(relationship_name + "_" + referenced_table_name + "_" + attribute.name)
+            new_attribute.set_optional(is_optional)
             main_table.add_attribute(new_attribute)
 
     def _merge_tables_into_one(self, main_table: Table, secondary_table: Table, relationship: Relationship, main_table_name: str, secondary_table_name: str) -> None:
         new_name = main_table_name + secondary_table_name
         new_primary_keys = list(main_table.primary_keys)
-        new_attributes = list(main_table.attributes) + list(secondary_table.primary_keys) + list(secondary_table.attributes)
+
+        new_attributes = list(main_table.attributes)
+        secondary_attributes = list(secondary_table.primary_keys) + list(secondary_table.attributes)
+
+        relationship_cardinality = relationship.cardinality_from if secondary_table_name == relationship.entity_from else relationship.cardinality_to
+        is_optional = relationship_cardinality.min_cardinality == MinimumCardinality.ZERO
+
+        for attribute in secondary_attributes:
+            attribute.set_optional(is_optional)
+            new_attributes.append(attribute)
+
         for attribute in relationship.attributes:
-            new_attributes.append(self._translate_attribute(attribute))
+            new_attribute = self._translate_attribute(attribute)
+            new_attribute.set_optional(is_optional)
+            new_attributes.append(new_attribute)
         
         new_table = Table(new_name, new_primary_keys, new_attributes)
 
@@ -497,6 +540,9 @@ class ERTranslator:
             del self._tables[main_table_name]
         if secondary_table_name in self._tables:
             del self._tables[secondary_table_name]
+
+        change_relationships_entity(self._relationships, main_table_name, new_table.name)
+        change_relationships_entity(self._relationships, secondary_table_name, new_table.name)
         
         self._tables[new_table.name] = new_table
 
@@ -516,7 +562,10 @@ class ERTranslator:
         for table_name, table in self._tables.items():
             # Generate attributes SQL
             attributes_sql = []
+            foreign_keys_names = [foreign_key.name for foreign_key in table.foreign_keys]
             for primary_key in table.primary_keys:
+                if primary_key.name in foreign_keys_names:
+                    continue
                 attr_sql = SQLGenerator.create_sql_attribute(primary_key.name, primary_key.is_optional)
                 attributes_sql.append(attr_sql)
             for attribute in table.attributes:
@@ -531,8 +580,9 @@ class ERTranslator:
             for foreign_key in table.foreign_keys:
                 ref_table_name = foreign_key.table_ref.name
                 ref_primary_key = foreign_key.primary_key_ref.name
+                sql_attribute = SQLGenerator.create_sql_attribute(foreign_key.name, foreign_key.is_optional, foreign_key.is_unique)
                 ref_sql = SQLGenerator.create_sql_reference(
-                    foreign_key.name, 
+                    sql_attribute, 
                     ref_table_name, 
                     ref_primary_key
                 )

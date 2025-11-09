@@ -29,41 +29,48 @@ def get_primary_keys(entity: Entity) -> list[str]:
         ids.append(identifier.name)
     return ids
 
-def get_all_father_entities(entities: list[Entity]) -> set[str]:
-    father_entities = set()
+def get_all_father_entities(entities: list[Entity]) -> list[str]:
+    father_entities = []
 
     for entity in entities:
         if entity.hierarchy:
-            father_entities.add(entity.name)
+            father_entities.append(entity.name)
 
     return father_entities
 
-def retrieve_connected_relationships(entity_names: list[str], relationships: dict[str, Relationship]) -> set[str]:
-    connected_relationships = set()
+def retrieve_connected_relationships(entity_names: list[str], relationships: dict[str, Relationship]) -> list[str]:
+    connected_relationships = []
 
     for relationship in relationships.values():
         
         if relationship.entity_from in entity_names or relationship.entity_to in entity_names:
-            connected_relationships.add(relationship.name)
+            connected_relationships.append(relationship.name)
 
     return connected_relationships
 
-def retrieve_children_names(father_entity: Entity) -> set[str]:
-    children_names = set()
+def retrieve_children_names(father_entity: Entity) -> list[str]:
+    children_names = []
     for child_name in father_entity.hierarchy.children:
-        children_names.add(child_name)
+        children_names.append(child_name)
 
     return children_names
 
-def retrieve_all_hierarchy_entities(entities: list[Entity]) -> set[str]:
-    hierarchy_entities = set()
+def retrieve_all_hierarchy_entities(entities: list[Entity]) -> list[str]:
+    hierarchy_entities = []
     for entity in entities:
         if entity.hierarchy:
-            hierarchy_entities.add(entity.name)
+            hierarchy_entities.append(entity.name)
             for child_name in entity.hierarchy.children:
-                hierarchy_entities.add(child_name)
+                hierarchy_entities.append(child_name)
     return hierarchy_entities
 
-def retrieve_all_hierarchy_relationships(entities: list[Entity], relationships: dict[str, Relationship]) -> set[str]:
+def retrieve_all_hierarchy_relationships(entities: list[Entity], relationships: dict[str, Relationship]) -> list[str]:
     hierarchy_entities = retrieve_all_hierarchy_entities(entities)
     return retrieve_connected_relationships(hierarchy_entities, relationships)
+
+def change_relationships_entity(relationships: dict[str, Relationship], old_name: str, new_name: str) -> None:
+    for relationship in relationships.values():
+        if relationship.entity_from == old_name:
+            relationship.set_entity_from(new_name)
+        if relationship.entity_to == old_name:
+            relationship.set_entity_to(new_name)

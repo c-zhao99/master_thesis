@@ -9,4 +9,4 @@ WHEN (
         AND {entity_name}.{selector_name} = {selector_value}
     )
 )
-SIGNAL SQLSTATE '70001' ('Inserted tuple needs to reference an instance of {selector_value}!')
+SIGNAL SQLSTATE '70001' ('Inserted tuple needs to reference an instance of {child_name}!')

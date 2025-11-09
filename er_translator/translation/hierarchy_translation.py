@@ -56,22 +56,21 @@ class HierachyTranslator:
 
     def _collapse_downwards(self, father_entity: Entity):
         father_relationships = retrieve_connected_relationships([father_entity.name], self._relationships)
-        children = father_entity.hierarchy.children
+        self._create_sql_trigger_downwards_children(father_entity)
 
         for relationship_name in father_relationships:
             relationship = self._relationships[relationship_name]
+            
             if relationship.cardinality_from.max_cardinality == MaximumCardinality.MANY and relationship.cardinality_to.max_cardinality == MaximumCardinality.MANY:
-                self._create_sql_trigger_downwards_relationship(relationship, father_entity, children)
+                continue
             elif relationship.cardinality_from.max_cardinality == MaximumCardinality.MANY:
                 if relationship.entity_from == father_entity.name:
                     self._create_sql_constraint_downwards(relationship.entity_to, relationship_name, father_entity)
-                else:
-                    self._create_sql_trigger_downwards_child(relationship, father_entity, children)
-            else:
+                
+            elif relationship.cardinality_to.max_cardinality == MaximumCardinality.MANY:
                 if relationship.entity_to == father_entity.name:
                     self._create_sql_constraint_downwards(relationship.entity_from, relationship_name, father_entity)
-                else:
-                    self._create_sql_trigger_downwards_child(relationship, father_entity, children)
+                
       
                 
                 
@@ -173,13 +172,15 @@ class HierachyTranslator:
         
         if hierarchy.hierarchy_disjointness == HierarchyDisjointness.OVERLAPPING:
             selector_name = self._get_selector_name(father, connected_child)
+            other_selector_name = self._get_selector_name(father, other_child)
         else:
             selector_name = self._get_selector_name(father)
+            other_selector_name = selector_name
         if other_child:
             if identifier_modifier != "":
-                sql_trigger = SQLGenerator.create_sql_trigger_before_insert(relationship, table_name, father, connected_child, selector_name, other_child, identifier_modifier)
+                sql_trigger = SQLGenerator.create_sql_trigger_before_insert(relationship, table_name, father, connected_child, selector_name, other_child, other_selector_name, identifier_modifier)
             else:
-                sql_trigger = SQLGenerator.create_sql_trigger_before_insert(relationship, table_name, father, connected_child, selector_name, other_child)
+                sql_trigger = SQLGenerator.create_sql_trigger_before_insert(relationship, table_name, father, connected_child, selector_name, other_child, other_selector_name)
         else:
             sql_trigger = SQLGenerator.create_sql_trigger_before_insert(relationship, table_name, father, connected_child, selector_name)
         self._hierarchy_checks.add_trigger(sql_trigger)
@@ -232,7 +233,7 @@ class HierachyTranslator:
             other_entity_name = relationship.entity_to
         else:
             other_entity_name = relationship.entity_from
-        return other_entity_name + "_" + primary_key.name
+        return relationship.name + "_" + other_entity_name + "_" + primary_key.name
 
     def _get_sql_constraint_values_disjoint(self, relationship: Relationship, father: Entity, connected_child: Entity) -> list[Condition]:
         conditions = []
@@ -251,7 +252,7 @@ class HierachyTranslator:
         # Create attributes for relationship's attributes
         for rel_attribute in relationship.attributes:
             # Relationship attributes are always optional in hierarchy collapse
-            attr_name = connected_child.name + "_" + rel_attribute.name
+            attr_name = relationship.name + "_" + connected_child.name + "_" + rel_attribute.name
             min_card = MinimumCardinality.ZERO if is_relationship_optional else rel_attribute.cardinality.min_cardinality
             cardinality = Cardinality(min_card, rel_attribute.cardinality.max_cardinality)
             relationship_attr = Attribute(attr_name, cardinality, rel_attribute.is_unique)
@@ -318,7 +319,7 @@ class HierachyTranslator:
         # Create attributes for relationship's attributes
         for rel_attribute in relationship.attributes:
             # Relationship attributes are always optional in hierarchy collapse
-            attr_name = connected_child.name + "_" + rel_attribute.name
+            attr_name = relationship.name + "_" + connected_child.name + "_" + rel_attribute.name
             min_card = MinimumCardinality.ZERO if is_relationship_optional else rel_attribute.cardinality.min_cardinality
             cardinality = Cardinality(min_card, rel_attribute.cardinality.max_cardinality)
             relationship_attr = Attribute(attr_name, cardinality, rel_attribute.is_unique)
@@ -400,70 +401,8 @@ class HierachyTranslator:
 
         return checks
 
-    def _create_sql_constraint_downwards(self, entity_name: str, relationship_name: str, father: Entity):
-        relationship = self._relationships[relationship_name]
-        
-        conditions = []
-        
-        for child_name in father.hierarchy.children:
-            checks = []
-            father_ids = self._get_identifier_names(father)
-            for id in father_ids:
-                check = f"{child_name}_{id} IS NOT NULL"
-                checks.append(check)
-            
-            # Add mandatory relationship attributes checks for this child
-            for rel_attribute in relationship.attributes:
-                if rel_attribute.cardinality.min_cardinality == MinimumCardinality.ONE:
-                    attr_name = f"{relationship_name}_{rel_attribute.name}"
-                    check = f"{attr_name} IS NOT NULL"
-                    checks.append(check)
-            
-            for other_child_name in father.hierarchy.children:
-                if child_name != other_child_name:
-                    for id in father_ids:
-                        check = f"{other_child_name}_{id} IS NULL"
-                        checks.append(check)
-                    
-                    # Add relationship attributes checks for other children (all must be NULL)
-                    for rel_attribute in relationship.attributes:
-                        attr_name = f"{relationship_name}_{rel_attribute.name}"
-                        check = f"{attr_name} IS NULL"
-                        checks.append(check)
-
-            condition = " AND ".join(checks)
-            conditions.append(f"({condition})")
-        sql_constraint = SQLGenerator.create_sql_downwards_constraint(relationship_name, conditions)
-        self._hierarchy_checks.add_constraint(entity_name, sql_constraint)
-
-    def _create_sql_trigger_downwards_relationship(self, relationship: Relationship, father: Entity, children: list[str]):
-        relationship_name = relationship.name
-        entity_from = relationship.entity_from
-        entity_to = relationship.entity_to
-        from_side_father = entity_from == father.name
-        for child_name in children:
-            for other_child_name in children:
-                if child_name == other_child_name:
-                    continue
-                father_ids = self._get_identifier_names(father)
-                checks = []
-                if from_side_father:
-                    other_relationship_table = relationship_name + "_" + other_child_name + "_" + entity_to
-                else:
-                    other_relationship_table = relationship_name + "_" + other_child_name + "_" + entity_from
-                for id in father_ids:
-                    check = f"N.{child_name}_{id} = {other_relationship_table}.{other_child_name}_{id}"
-                    checks.append(check)
-                conditions = " OR ".join(checks)
-                if from_side_father:
-                    relationship_table = relationship_name + "_" + child_name + "_" + entity_to
-                else:
-                    relationship_table = relationship_name + "_" + child_name + "_" + entity_from
-                self._create_sql_trigger_downwards(relationship.name, relationship_table, other_relationship_table, conditions)
-
-    def _create_sql_trigger_downwards_child(self, relationship: Relationship, father: Entity, children: list[str]):
-        other_entity_name = relationship.entity_to if relationship.entity_from == father.name else relationship.entity_from
-        
+    def _create_sql_trigger_downwards_children(self, father: Entity):
+        children = father.hierarchy.children
         for child_name in children:
             for other_child_name in children:
                 if child_name == other_child_name:
@@ -473,10 +412,47 @@ class HierachyTranslator:
                     check = f"N.{identifier.name} = {other_child_name}.{identifier.name}"
                     checks.append(check)
                 conditions = " OR ".join(checks)
-                
-                self._create_sql_trigger_downwards(relationship.name, child_name, other_child_name, conditions)
+                message = f"Only one child must exist with a specific identiefier!"
+                self._create_sql_trigger_downwards(child_name, other_child_name, conditions, message)
+        
 
+    def _create_sql_constraint_downwards(self, entity_name: str, relationship_name: str, father: Entity):
+        relationship = self._relationships[relationship_name]
+        
+        conditions = []
+        
+        
+        for child_name in father.hierarchy.children:
+            checks = []
+            father_ids = self._get_identifier_names(father)
+            for id in father_ids:
+                check = f"{relationship_name}_{child_name}_{id} IS NOT NULL"
+                checks.append(check)
+            
+            # Add mandatory relationship attributes checks for this child
+            for rel_attribute in relationship.attributes:
+                if rel_attribute.cardinality.min_cardinality == MinimumCardinality.ONE:
+                    attr_name = f"{relationship_name}_{child_name}_{rel_attribute.name}"
+                    check = f"{attr_name} IS NOT NULL"
+                    checks.append(check)
+            
+            for other_child_name in father.hierarchy.children:
+                if child_name != other_child_name:
+                    for id in father_ids:
+                        check = f"{relationship_name}_{other_child_name}_{id} IS NULL"
+                        checks.append(check)
                     
-    def _create_sql_trigger_downwards(self, relationship_name: str, table_name: str, other_table_name: str, conditions: str):        
-        sql_trigger = SQLGenerator.create_sql_downwards_trigger(relationship_name, table_name, other_table_name, conditions)
+                    # Add relationship attributes checks for other children (all must be NULL)
+                    for rel_attribute in relationship.attributes:
+                        attr_name = f"{relationship_name}_{other_child_name}_{rel_attribute.name}"
+                        check = f"{attr_name} IS NULL"
+                        checks.append(check)
+
+            condition = " AND ".join(checks)
+            conditions.append(f"({condition})")
+        sql_constraint = SQLGenerator.create_sql_downwards_constraint(relationship_name, conditions)
+        self._hierarchy_checks.add_constraint(entity_name, sql_constraint)
+                    
+    def _create_sql_trigger_downwards(self, table_name: str, other_table_name: str, conditions: str, message: str):        
+        sql_trigger = SQLGenerator.create_sql_downwards_trigger(table_name, other_table_name, conditions, message)
         self._hierarchy_checks.add_trigger(sql_trigger)

@@ -9,4 +9,4 @@ WHEN (
         WHERE {conditions}
     )
 )
-SIGNAL SQLSTATE '70001' ('Only one relationship active at a time for {relationship_name}!')
+SIGNAL SQLSTATE '70001' ('{message}')
