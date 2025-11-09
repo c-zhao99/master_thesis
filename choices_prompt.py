@@ -87,9 +87,6 @@ def choices_selector(entities, relationships, file_path=None):
     composite_attributes_choices, current_composite_attributes_choices = er_translator.get_composite_attributes_choices()
     hierarchy_choices, current_hierarchy_choices = er_translator.get_hierarchy_choices()
     relationship_choices, current_relationship_choices = er_translator.get_relationship_choices()
-
-    for entity_name in current_hierarchy_choices.keys():
-        current_hierarchy_choices[entity_name] = HIERARCHY_CHOICE.COLLAPSE_DOWNWARDS
     
     while True:
         entities_copy = {}
