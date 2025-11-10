@@ -203,13 +203,13 @@
           "label": "Manage",
           "sourceEntityDetails": {
             "id": "ab5287a0-97e6-4241-a4b3-454000b9d01b",
-            "minCardinality": "Mandatory",
-            "maxCardinality": "One"
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
           },
           "targetEntityDetails": {
             "id": "cc7b8be4-d661-4b08-a24c-6c71da151911",
-            "minCardinality": "Optional",
-            "maxCardinality": "Many"
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
           },
           "isSelected": false,
           "isConnectable": true

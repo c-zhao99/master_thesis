@@ -5,10 +5,10 @@ CREATE TABLE Employee (
     Product {ADD_TYPE},
     TYPE_ManagerEngineerProductManager VARCHAR(50) NOT NULL CHECK (TYPE_ManagerEngineerProductManager IN (['Manager', 'Engineer', 'ProductManager', 'Employee'])),
     Promote_Engineer_EmployeeID {ADD_TYPE} UNIQUE REFERENCES Employee(EmployeeID),
-    Manage_Employee_EmployeeID {ADD_TYPE} UNIQUE REFERENCES Employee(EmployeeID),
+    Manage_Manager_EmployeeID {ADD_TYPE} UNIQUE REFERENCES Employee(EmployeeID),
     Interact_Customer_CustomerID {ADD_TYPE} UNIQUE REFERENCES Customer(CustomerID),
     PRIMARY KEY (EmployeeID),
-    CONSTRAINT ManagerEngineerProductManager CHECK ((TYPE_ManagerEngineerProductManager = Manager AND TeamName IS NOT NULL AND Promote_Engineer_EmployeeID IS NOT NULL AND Level IS NULL AND Product IS NULL AND Manage_Employee_EmployeeID IS NOT NULL AND Interact_Customer_EmployeeID IS NULL) OR (TYPE_ManagerEngineerProductManager = Engineer AND Level IS NOT NULL AND Promote_Engineer_EmployeeID IS NULL AND TeamName IS NULL AND Product IS NULL AND Manage_Employee_EmployeeID IS NULL AND Interact_Customer_EmployeeID IS NULL) OR (TYPE_ManagerEngineerProductManager = ProductManager AND Product IS NOT NULL AND Promote_Engineer_EmployeeID IS NULL AND TeamName IS NULL AND Level IS NULL AND Manage_Employee_EmployeeID IS NULL) OR (TYPE_ManagerEngineerProductManager = Employee AND TeamName IS NULL AND Level IS NULL AND Product IS NULL AND Promote_Engineer_EmployeeID IS NULL AND Manage_Employee_EmployeeID IS NULL AND Interact_Customer_EmployeeID IS NULL))
+    CONSTRAINT ManagerEngineerProductManager CHECK ((TYPE_ManagerEngineerProductManager = Manager AND TeamName IS NOT NULL AND Promote_Engineer_EmployeeID IS NOT NULL AND Level IS NULL AND Product IS NULL AND Interact_Customer_EmployeeID IS NULL) OR (TYPE_ManagerEngineerProductManager = Engineer AND Level IS NOT NULL AND Promote_Engineer_EmployeeID IS NULL AND TeamName IS NULL AND Product IS NULL AND Interact_Customer_EmployeeID IS NULL) OR (TYPE_ManagerEngineerProductManager = ProductManager AND Product IS NOT NULL AND Promote_Engineer_EmployeeID IS NULL AND TeamName IS NULL AND Level IS NULL) OR (TYPE_ManagerEngineerProductManager = Employee AND TeamName IS NULL AND Level IS NULL AND Product IS NULL AND Promote_Engineer_EmployeeID IS NULL AND Interact_Customer_EmployeeID IS NULL))
 );
 
 
@@ -64,3 +64,16 @@ WHEN (
     )
 )
 SIGNAL SQLSTATE '70001' ('Inserted tuple needs to reference an instance of Engineer!')
+
+CREATE TRIGGER ManageManager
+BEFORE INSERT ON Employee
+REFERENCING NEW AS N
+FOR EACH ROW
+WHEN (
+    NOT EXISTS(
+        SELECT * FROM Employee
+        WHERE Employee.EmployeeID = N.Manage_Manager_EmployeeID
+        AND Employee.TYPE_ManagerEngineerProductManager = Manager
+    )
+)
+SIGNAL SQLSTATE '70001' ('Inserted tuple needs to reference an instance of Manager!')
