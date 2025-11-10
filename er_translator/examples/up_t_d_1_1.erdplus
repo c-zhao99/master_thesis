@@ -174,13 +174,13 @@
           "label": "Promote",
           "sourceEntityDetails": {
             "id": "ab5287a0-97e6-4241-a4b3-454000b9d01b",
-            "minCardinality": "Mandatory",
-            "maxCardinality": "One"
+            "minCardinality": "Optional",
+            "maxCardinality": "Many"
           },
           "targetEntityDetails": {
             "id": "fe53ffb7-069a-4570-81b7-db57f98646af",
-            "minCardinality": "Optional",
-            "maxCardinality": "Many"
+            "minCardinality": "Mandatory",
+            "maxCardinality": "One"
           },
           "isSelected": false,
           "isConnectable": true

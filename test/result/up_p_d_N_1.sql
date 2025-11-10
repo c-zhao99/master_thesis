@@ -4,10 +4,10 @@ CREATE TABLE Employee (
     Level {ADD_TYPE},
     Product {ADD_TYPE},
     TYPE_ManagerEngineerProductManager VARCHAR(50) NOT NULL CHECK (TYPE_ManagerEngineerProductManager IN (['Manager', 'Engineer', 'ProductManager', 'Employee'])),
-    Promote_Engineer_EmployeeID {ADD_TYPE} UNIQUE REFERENCES Employee(EmployeeID),
+    Promote_Manager_EmployeeID {ADD_TYPE} UNIQUE REFERENCES Employee(EmployeeID),
     Manage_Manager_EmployeeID {ADD_TYPE} UNIQUE REFERENCES Employee(EmployeeID),
     PRIMARY KEY (EmployeeID),
-    CONSTRAINT ManagerEngineerProductManager CHECK ((TYPE_ManagerEngineerProductManager = Manager AND TeamName IS NOT NULL AND Promote_Engineer_EmployeeID IS NOT NULL AND Level IS NULL AND Product IS NULL) OR (TYPE_ManagerEngineerProductManager = Engineer AND Level IS NOT NULL AND Promote_Engineer_EmployeeID IS NULL AND TeamName IS NULL AND Product IS NULL) OR (TYPE_ManagerEngineerProductManager = ProductManager AND Product IS NOT NULL AND Promote_Engineer_EmployeeID IS NULL AND TeamName IS NULL AND Level IS NULL) OR (TYPE_ManagerEngineerProductManager = Employee AND TeamName IS NULL AND Level IS NULL AND Product IS NULL AND Promote_Engineer_EmployeeID IS NULL))
+    CONSTRAINT ManagerEngineerProductManager CHECK ((TYPE_ManagerEngineerProductManager = Manager AND TeamName IS NOT NULL AND Promote_Manager_EmployeeID IS NULL AND Level IS NULL AND Product IS NULL) OR (TYPE_ManagerEngineerProductManager = Engineer AND Level IS NOT NULL AND Promote_Manager_EmployeeID IS NOT NULL AND TeamName IS NULL AND Product IS NULL) OR (TYPE_ManagerEngineerProductManager = ProductManager AND Product IS NOT NULL AND Promote_Manager_EmployeeID IS NULL AND TeamName IS NULL AND Level IS NULL) OR (TYPE_ManagerEngineerProductManager = Employee AND TeamName IS NULL AND Level IS NULL AND Product IS NULL AND Promote_Manager_EmployeeID IS NULL))
 );
 
 
@@ -52,18 +52,18 @@ WHEN (
 )
 SIGNAL SQLSTATE '70001' ('Inserted tuple needs to reference an instance of Manager!')
 
-CREATE TRIGGER PromoteEngineer
+CREATE TRIGGER PromoteManager
 BEFORE INSERT ON Employee
 REFERENCING NEW AS N
 FOR EACH ROW
 WHEN (
-    N.TYPE_ManagerEngineerProductManager = Manager AND NOT EXISTS(
+    N.TYPE_ManagerEngineerProductManager = Engineer AND NOT EXISTS(
         SELECT * FROM Employee
-        WHERE Employee.EmployeeID = N.Promote_Engineer_EmployeeID
-        AND Employee.TYPE_ManagerEngineerProductManager = Engineer
+        WHERE Employee.EmployeeID = N.Promote_Manager_EmployeeID
+        AND Employee.TYPE_ManagerEngineerProductManager = Manager
     )
 )
-SIGNAL SQLSTATE '70001' ('Inserted tuple needs to reference an instance of Engineer!')
+SIGNAL SQLSTATE '70001' ('Inserted tuple needs to reference an instance of Manager!')
 
 CREATE TRIGGER ManageManager
 BEFORE INSERT ON Employee
