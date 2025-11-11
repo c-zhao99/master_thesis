@@ -36,7 +36,7 @@ WHEN (
         WHERE N.EmployeeID = Engineer.EmployeeID
     )
 )
-SIGNAL SQLSTATE '70001' ('Only one child must exist with a specific identiefier!')
+SIGNAL SQLSTATE '70001' ('Only one child must exist with a specific identifier!')
 
 CREATE TRIGGER Engineer_Manager
 BEFORE INSERT ON Engineer
@@ -49,4 +49,4 @@ WHEN (
         WHERE N.EmployeeID = Manager.EmployeeID
     )
 )
-SIGNAL SQLSTATE '70001' ('Only one child must exist with a specific identiefier!')
+SIGNAL SQLSTATE '70001' ('Only one child must exist with a specific identifier!')

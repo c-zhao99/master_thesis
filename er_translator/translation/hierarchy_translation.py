@@ -127,8 +127,8 @@ class HierachyTranslator:
             self._check_recursive_relationship_child_cardinality(relationship, father, entity_from)
         else:
             if relationship.cardinality_from.max_cardinality == MaximumCardinality.MANY and relationship.cardinality_to.max_cardinality == MaximumCardinality.MANY:
-                self._create_sql_trigger(relationship, relationship.name, father, entity_from, entity_to)
-                self._create_sql_trigger(relationship, relationship.name, father, entity_to, entity_from)
+                self._create_sql_trigger(relationship, relationship.name, father, entity_from)
+                self._create_sql_trigger(relationship, relationship.name, father, entity_to)
             elif relationship.cardinality_from.max_cardinality == MaximumCardinality.MANY:
                 self._create_sql_trigger(relationship, father.name, father, entity_from, entity_to)
                 self._create_sql_constraint(relationship, father, entity_to)
@@ -138,8 +138,8 @@ class HierachyTranslator:
 
     def _check_recursive_relationship_child_cardinality(self, relationship: Relationship, father: Entity, entity_from: Entity):
         if relationship.cardinality_from.max_cardinality == MaximumCardinality.MANY and relationship.cardinality_to.max_cardinality == MaximumCardinality.MANY:
-            self._create_sql_trigger(relationship, relationship.name, father, entity_from, entity_from, "_A")
-            self._create_sql_trigger(relationship, relationship.name, father, entity_from, entity_from, "_B")
+            self._create_sql_trigger(relationship, relationship.name, father, entity_from, identifier_modifier="_A")
+            self._create_sql_trigger(relationship, relationship.name, father, entity_from, identifier_modifier="_B")
         else:
             self._create_sql_trigger(relationship, father.name, father, entity_from, entity_from)
             self._create_sql_constraint(relationship, father, entity_from)
@@ -182,7 +182,10 @@ class HierachyTranslator:
             else:
                 sql_trigger = SQLGenerator.create_sql_trigger_before_insert(relationship, table_name, father, connected_child, selector_name, other_child, other_selector_name)
         else:
-            sql_trigger = SQLGenerator.create_sql_trigger_before_insert(relationship, table_name, father, connected_child, selector_name)
+            if identifier_modifier != "":
+                sql_trigger = SQLGenerator.create_sql_trigger_before_insert(relationship, table_name, father, connected_child, selector_name, identifier_modifier=identifier_modifier)
+            else:
+                sql_trigger = SQLGenerator.create_sql_trigger_before_insert(relationship, table_name, father, connected_child, selector_name)
         self._hierarchy_checks.add_trigger(sql_trigger)
 
     def _create_sql_constraint(self, relationship: Relationship, father: Entity, connected_child: Entity):
@@ -412,7 +415,7 @@ class HierachyTranslator:
                     check = f"N.{identifier.name} = {other_child_name}.{identifier.name}"
                     checks.append(check)
                 conditions = " OR ".join(checks)
-                message = f"Only one child must exist with a specific identiefier!"
+                message = f"Only one child must exist with a specific identifier!"
                 self._create_sql_trigger_downwards(child_name, other_child_name, conditions, message)
         
 

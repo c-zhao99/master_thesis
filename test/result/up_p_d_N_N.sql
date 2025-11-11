@@ -38,7 +38,7 @@ BEFORE INSERT ON PlanWith
 REFERENCING NEW AS N
 FOR EACH ROW
 WHEN (
-    N.TYPE_ManagerEngineerProductManager = Manager AND NOT EXISTS(
+    NOT EXISTS(
         SELECT * FROM Employee
         WHERE Employee.EmployeeID = N.PlanWith_Manager_EmployeeID_A
         AND Employee.TYPE_ManagerEngineerProductManager = Manager
@@ -51,7 +51,7 @@ BEFORE INSERT ON PlanWith
 REFERENCING NEW AS N
 FOR EACH ROW
 WHEN (
-    N.TYPE_ManagerEngineerProductManager = Manager AND NOT EXISTS(
+    NOT EXISTS(
         SELECT * FROM Employee
         WHERE Employee.EmployeeID = N.PlanWith_Manager_EmployeeID_B
         AND Employee.TYPE_ManagerEngineerProductManager = Manager
