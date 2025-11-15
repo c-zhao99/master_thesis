@@ -94,7 +94,7 @@
           "y": 248
         },
         "data": {
-          "label": "AB",
+          "label": "Hold",
           "sourceEntityDetails": {
             "id": "d654e231-5652-447e-9f13-75f38a8628fe",
             "minCardinality": "Optional",
